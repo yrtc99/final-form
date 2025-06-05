@@ -1,22 +1,39 @@
 import axios from 'axios';
 
-// 創建一個預先配置的axios實例，自動添加令牌
+// 簡化的 axios 配置，不使用 JWT
 const setupAxios = () => {
-  // 檢查本地存儲中的令牌
-  const token = localStorage.getItem('token');
-  
-  if (token) {
-    // 為所有請求設置默認headers
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  }
-  
-  // 設置請求攔截器，確保每次請求都有最新的令牌
+  // 設置請求攔截器，添加通用配置
   axios.interceptors.request.use(
     config => {
-      const currentToken = localStorage.getItem('token');
-      if (currentToken) {
-        config.headers['Authorization'] = `Bearer ${currentToken}`;
+      // 確保請求有正確的 Content-Type
+      if (!config.headers['Content-Type']) {
+        config.headers['Content-Type'] = 'application/json';
       }
+      
+      // 從 localStorage 獲取當前用戶信息
+      const userData = localStorage.getItem('user');
+      if (userData) {
+        try {
+          const user = JSON.parse(userData);
+          // 如果是 POST/PUT 請求，自動添加 student_id
+          if ((config.method === 'post' || config.method === 'put') && config.data) {
+            // 如果是對象，添加 student_id
+            if (typeof config.data === 'object' && !Array.isArray(config.data)) {
+              config.data.student_id = user.id;
+            }
+          }
+          // 如果是 GET 請求，添加到查詢參數
+          if (config.method === 'get') {
+            config.params = config.params || {};
+            if (!config.params.student_id) {
+              config.params.student_id = user.id;
+            }
+          }
+        } catch (e) {
+          console.error('Error parsing user data:', e);
+        }
+      }
+      
       return config;
     },
     error => {
@@ -24,16 +41,13 @@ const setupAxios = () => {
     }
   );
   
-  // 設置響應攔截器來處理401錯誤
+  // 設置響應攔截器來處理錯誤
   axios.interceptors.response.use(
     response => response,
     error => {
-      if (error.response && error.response.status === 401) {
-        // 令牌過期或無效，可以在這裡處理登出邏輯
-        console.log('Authentication token expired or invalid');
-        // localStorage.removeItem('token');
-        // localStorage.removeItem('user');
-        // window.location.href = '/login';
+      // 簡化的錯誤處理
+      if (error.response) {
+        console.error('API Error:', error.response.status, error.response.data);
       }
       return Promise.reject(error);
     }

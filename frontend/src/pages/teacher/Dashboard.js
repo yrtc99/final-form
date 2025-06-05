@@ -66,7 +66,7 @@ const TeacherDashboard = () => {
         });
         
       } catch (err) {
-        setError('Failed to load dashboard data');
+        setError('載入儀表板數據失敗');
         console.error(err);
       } finally {
         setLoading(false);
@@ -81,7 +81,7 @@ const TeacherDashboard = () => {
     labels: courses.slice(0, 5).map(course => course.title),
     datasets: [
       {
-        label: 'Enrolled Students',
+        label: '註冊學生',
         data: courses.slice(0, 5).map(course => course.enrollment_count || 0),
         backgroundColor: [
           'rgba(255, 99, 132, 0.6)',
@@ -114,7 +114,7 @@ const TeacherDashboard = () => {
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
         <Typography variant="h4">
-          Teacher Dashboard
+          教師儀表板
         </Typography>
         <Button 
           variant="contained" 
@@ -122,7 +122,7 @@ const TeacherDashboard = () => {
           startIcon={<Add />}
           onClick={() => navigate('/teacher/courses/new')}
         >
-          Create Course
+          創建課程
         </Button>
       </Box>
       
@@ -145,7 +145,7 @@ const TeacherDashboard = () => {
           >
             <School sx={{ fontSize: 40, mb: 1 }} />
             <Typography component="h2" variant="h6" gutterBottom>
-              Total Courses
+              總課程數
             </Typography>
             <Typography component="p" variant="h4">
               {stats.totalCourses}
@@ -168,7 +168,7 @@ const TeacherDashboard = () => {
           >
             <People sx={{ fontSize: 40, mb: 1 }} />
             <Typography component="h2" variant="h6" gutterBottom>
-              Enrolled Students
+              註冊學生
             </Typography>
             <Typography component="p" variant="h4">
               {stats.totalStudents}
@@ -191,7 +191,7 @@ const TeacherDashboard = () => {
           >
             <MenuBook sx={{ fontSize: 40, mb: 1 }} />
             <Typography component="h2" variant="h6" gutterBottom>
-              Total Lessons
+              總課時數
             </Typography>
             <Typography component="p" variant="h4">
               {stats.totalLessons}
@@ -203,7 +203,7 @@ const TeacherDashboard = () => {
         <Grid item xs={12} md={6}>
           <Paper sx={{ p: 2 }} elevation={3}>
             <Typography variant="h6" gutterBottom>
-              Course Enrollment
+              課程註冊情況
             </Typography>
             <Divider sx={{ mb: 2 }} />
             {courses.length > 0 ? (
@@ -217,7 +217,7 @@ const TeacherDashboard = () => {
                 />
               </Box>
             ) : (
-              <Alert severity="info">No courses available to display.</Alert>
+              <Alert severity="info">沒有可顯示的課程。</Alert>
             )}
           </Paper>
         </Grid>
@@ -226,7 +226,7 @@ const TeacherDashboard = () => {
         <Grid item xs={12} md={6}>
           <Paper sx={{ p: 2 }} elevation={3}>
             <Typography variant="h6" gutterBottom>
-              Recent Students
+              最近的學生
             </Typography>
             <Divider sx={{ mb: 2 }} />
             {students.length > 0 ? (
@@ -246,7 +246,7 @@ const TeacherDashboard = () => {
                 ))}
               </List>
             ) : (
-              <Alert severity="info">No students enrolled yet.</Alert>
+              <Alert severity="info">尚無學生註冊。</Alert>
             )}
             <Box sx={{ mt: 2, textAlign: 'center' }}>
               <Button 
@@ -255,7 +255,7 @@ const TeacherDashboard = () => {
                 onClick={() => navigate('/teacher/students')}
                 startIcon={<People />}
               >
-                View All Students
+                查看所有學生
               </Button>
             </Box>
           </Paper>

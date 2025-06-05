@@ -42,7 +42,7 @@ const Navbar = ({ open, toggleDrawer }) => {
       <Toolbar>
         <IconButton
           color="inherit"
-          aria-label="open drawer"
+          aria-label="開啟選單"
           onClick={toggleDrawer}
           edge="start"
           sx={{ mr: 2 }}
@@ -50,17 +50,17 @@ const Navbar = ({ open, toggleDrawer }) => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-          Python Learning Platform
+          Python 學習平台
         </Typography>
         
         {currentUser && (
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Typography variant="body1" sx={{ mr: 2 }}>
-              {currentUser.username} ({currentUser.role})
+              {currentUser.username} ({currentUser.role === 'teacher' ? '老師' : currentUser.role === 'student' ? '學生' : currentUser.role})
             </Typography>
             <IconButton
               size="large"
-              aria-label="account of current user"
+              aria-label="目前使用者帳戶"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleMenu}
@@ -85,8 +85,8 @@ const Navbar = ({ open, toggleDrawer }) => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleProfile}>Profile</MenuItem>
-              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              <MenuItem onClick={handleProfile}>個人資料</MenuItem>
+              <MenuItem onClick={handleLogout}>登出</MenuItem>
             </Menu>
           </Box>
         )}

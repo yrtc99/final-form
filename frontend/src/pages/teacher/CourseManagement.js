@@ -74,7 +74,7 @@ const CourseManagement = () => {
       const response = await axios.get('/api/courses');
       setCourses(response.data.courses);
     } catch (err) {
-      setError('Failed to load courses');
+      setError('載入課程失敗');
       console.error(err);
     } finally {
       setLoading(false);
@@ -99,7 +99,7 @@ const CourseManagement = () => {
       setDeleteDialogOpen(false);
       setCourseToDelete(null);
     } catch (err) {
-      setError('Failed to delete course');
+      setError('刪除課程失敗');
       console.error(err);
     }
   };
@@ -125,7 +125,7 @@ const CourseManagement = () => {
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
         <Typography variant="h4">
-          Course Management
+          課程管理
         </Typography>
         <Button 
           variant="contained" 
@@ -133,7 +133,7 @@ const CourseManagement = () => {
           startIcon={<Add />}
           onClick={() => navigate('/teacher/courses/new')}
         >
-          Create New Course
+          創建新課程
         </Button>
       </Box>
       
@@ -143,17 +143,17 @@ const CourseManagement = () => {
         <Paper sx={{ p: 3, textAlign: 'center' }}>
           <MenuBook sx={{ fontSize: 60, color: 'text.secondary', mb: 2 }} />
           <Typography variant="h6" gutterBottom>
-            No Courses Yet
+            尚無課程
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-            You haven't created any courses yet. Get started by creating your first course.
+            您尚未創建任何課程。開始創建您的第一個課程吧。
           </Typography>
           <Button 
             variant="contained" 
             startIcon={<Add />}
             onClick={() => navigate('/teacher/courses/new')}
           >
-            Create First Course
+            創建第一個課程
           </Button>
         </Paper>
       ) : (
@@ -161,11 +161,11 @@ const CourseManagement = () => {
           <Table sx={{ minWidth: 650 }}>
             <TableHead>
               <TableRow>
-                <TableCell>Course Title</TableCell>
-                <TableCell>Description</TableCell>
-                <TableCell>Units</TableCell>
-                <TableCell>Students</TableCell>
-                <TableCell align="right">Actions</TableCell>
+                <TableCell>課程標題</TableCell>
+                <TableCell>描述</TableCell>
+                <TableCell>單元</TableCell>
+                <TableCell>學生</TableCell>
+                <TableCell align="right">操作</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -177,7 +177,7 @@ const CourseManagement = () => {
                   <TableCell>{course.description}</TableCell>
                   <TableCell>
                     <Chip 
-                      label={`${course.units_count || 0} units`} 
+                      label={`${course.units_count || 0} 個單元`} 
                       size="small" 
                       color="primary" 
                       variant="outlined" 
@@ -185,7 +185,7 @@ const CourseManagement = () => {
                   </TableCell>
                   <TableCell>
                     <Chip 
-                      label={`${course.enrollment_count || 0} students`} 
+                      label={`${course.enrollment_count || 0} 個學生`} 
                       size="small" 
                       color="secondary" 
                       variant="outlined" 
@@ -193,21 +193,21 @@ const CourseManagement = () => {
                   </TableCell>
                   <TableCell align="right">
                     <IconButton 
-                      aria-label="edit"
+                      aria-label="編輯"
                       onClick={() => handleEditCourse(course.id)}
                       color="primary"
                     >
                       <Edit />
                     </IconButton>
                     <IconButton 
-                      aria-label="manage students"
+                      aria-label="管理學生"
                       onClick={() => handleManageStudents(course.id)}
                       color="secondary"
                     >
                       <People />
                     </IconButton>
                     <IconButton 
-                      aria-label="delete"
+                      aria-label="刪除"
                       onClick={() => handleDeleteClick(course)}
                       color="error"
                     >
@@ -229,19 +229,17 @@ const CourseManagement = () => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Delete Course?"}
+          {"刪除課程？"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete the course "{courseToDelete?.title}"? 
-            This action cannot be undone and will remove all units, lessons, and student enrollments 
-            associated with this course.
+            您確定要刪除課程「{courseToDelete?.title}」嗎？此操作無法撤銷，並將刪除與此課程相關的所有單元、課時和學生註冊記錄。
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleDeleteCancel}>Cancel</Button>
+          <Button onClick={handleDeleteCancel}>取消</Button>
           <Button onClick={handleDeleteConfirm} color="error" autoFocus>
-            Delete
+            刪除
           </Button>
         </DialogActions>
       </Dialog>

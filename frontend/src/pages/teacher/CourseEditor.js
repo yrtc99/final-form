@@ -84,7 +84,7 @@ const CourseEditor = () => {
       const sortedUnits = response.data.course.units.sort((a, b) => a.order - b.order);
       setUnits(sortedUnits);
     } catch (err) {
-      setError('Failed to load course data');
+      setError('載入課程資料失敗');
       console.error(err);
     } finally {
       setLoading(false);
@@ -101,7 +101,7 @@ const CourseEditor = () => {
 
   const handleSaveCourse = async () => {
     if (!course.title) {
-      setError('Course title is required');
+      setError('課程標題為必填項');
       return;
     }
     
@@ -117,14 +117,14 @@ const CourseEditor = () => {
         response = await axios.put(`/api/courses/${courseId}`, course);
       }
       
-      setSuccess('Course saved successfully!');
+      setSuccess('課程儲存成功！');
       
       // Clear success message after 3 seconds
       setTimeout(() => {
         setSuccess('');
       }, 3000);
     } catch (err) {
-      setError('Failed to save course');
+      setError('儲存課程失敗');
       console.error(err);
     } finally {
       setSaving(false);
@@ -157,7 +157,7 @@ const CourseEditor = () => {
 
   const handleSaveUnit = async () => {
     if (!currentUnit.title) {
-      setError('Unit title is required');
+      setError('單元標題為必填項');
       return;
     }
     
@@ -172,14 +172,14 @@ const CourseEditor = () => {
       }
       
       setUnitDialogOpen(false);
-      setSuccess('Unit saved successfully!');
+      setSuccess('單元儲存成功！');
       
       // Clear success message after 3 seconds
       setTimeout(() => {
         setSuccess('');
       }, 3000);
     } catch (err) {
-      setError('Failed to save unit');
+      setError('儲存單元失敗');
       console.error(err);
     }
   };
@@ -283,16 +283,16 @@ const CourseEditor = () => {
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
         <Typography variant="h4">
-          {isNewCourse ? 'Create New Course' : 'Edit Course'}
+          {isNewCourse ? '創建新課程' : `編輯課程：${course.title || '載入中...'}`}
         </Typography>
         <Button 
           variant="contained" 
           color="primary" 
-          startIcon={<Save />}
           onClick={handleSaveCourse}
           disabled={saving}
+          startIcon={saving ? <CircularProgress size={20} color="inherit" /> : <Save />}
         >
-          {saving ? 'Saving...' : 'Save Course'}
+          儲存課程
         </Button>
       </Box>
       
@@ -300,8 +300,8 @@ const CourseEditor = () => {
       {success && <Alert severity="success" sx={{ mb: 3 }}>{success}</Alert>}
       
       <Paper sx={{ p: 3, mb: 4 }}>
-        <Typography variant="h6" gutterBottom>
-          Course Details
+        <Typography variant="h5" component="h2" gutterBottom sx={{ mt: 4, mb: 2 }}>
+          課程詳情
         </Typography>
         <Divider sx={{ mb: 3 }} />
         
@@ -310,7 +310,7 @@ const CourseEditor = () => {
             <TextField
               required
               fullWidth
-              label="Course Title"
+              label="課程標題"
               name="title"
               value={course.title}
               onChange={handleCourseChange}
@@ -320,7 +320,7 @@ const CourseEditor = () => {
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Course Description"
+              label="課程描述"
               name="description"
               value={course.description}
               onChange={handleCourseChange}
@@ -335,23 +335,22 @@ const CourseEditor = () => {
       {!isNewCourse && (
         <Paper sx={{ p: 3 }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-            <Typography variant="h6">
-              Course Units
+            <Typography variant="h5" component="h2" gutterBottom sx={{ mt: 4, mb: 2 }}>
+              單元
             </Typography>
             <Button 
               variant="contained" 
               color="primary" 
-              startIcon={<Add />}
               onClick={() => openUnitDialog()}
             >
-              Add Unit
+              新增單元
             </Button>
           </Box>
           <Divider sx={{ mb: 3 }} />
           
           {units.length === 0 ? (
             <Alert severity="info">
-              This course doesn't have any units yet. Add your first unit to get started.
+              此課程尚無單元。新增您的第一個單元以開始。
             </Alert>
           ) : (
             <List>
@@ -394,14 +393,14 @@ const CourseEditor = () => {
                       </Box>
                     </Box>
                     
-                    <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                    <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
                       {unit.description}
                     </Typography>
                     
                     <Accordion sx={{ mt: 2 }}>
                       <AccordionSummary expandIcon={<ExpandMore />}>
                         <Typography>
-                          Lessons ({unit.lessons?.length || 0})
+                          課時 ({unit.lessons?.length || 0})
                         </Typography>
                       </AccordionSummary>
                       <AccordionDetails>
@@ -416,14 +415,14 @@ const CourseEditor = () => {
                                 <ListItemSecondaryAction>
                                   <IconButton 
                                     edge="end" 
-                                    aria-label="edit"
+                                    aria-label="編輯"
                                     onClick={() => handleEditLesson(lesson.id)}
                                   >
                                     <Edit />
                                   </IconButton>
                                   <IconButton 
                                     edge="end" 
-                                    aria-label="delete"
+                                    aria-label="刪除"
                                     onClick={() => openDeleteDialog(lesson, 'lesson')}
                                   >
                                     <Delete />
@@ -433,8 +432,8 @@ const CourseEditor = () => {
                             ))}
                           </List>
                         ) : (
-                          <Typography variant="body2" color="text.secondary">
-                            No lessons in this unit yet.
+                          <Typography variant="subtitle1" color="text.secondary">
+                            此單元尚無課時。
                           </Typography>
                         )}
                         
@@ -444,7 +443,7 @@ const CourseEditor = () => {
                           sx={{ mt: 2 }}
                           onClick={() => handleCreateLesson(unit.id)}
                         >
-                          Add Lesson
+                          新增課時
                         </Button>
                       </AccordionDetails>
                     </Accordion>
@@ -458,13 +457,13 @@ const CourseEditor = () => {
       
       {/* Unit Dialog */}
       <Dialog open={unitDialogOpen} onClose={() => setUnitDialogOpen(false)} maxWidth="sm" fullWidth>
-        <DialogTitle>{isEditingUnit ? 'Edit Unit' : 'Add New Unit'}</DialogTitle>
+        <DialogTitle>{isEditingUnit ? '編輯單元' : '新增單元'}</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
             name="title"
-            label="Unit Title"
+            label="單元標題"
             type="text"
             fullWidth
             variant="outlined"
@@ -475,7 +474,7 @@ const CourseEditor = () => {
           <TextField
             margin="dense"
             name="description"
-            label="Unit Description"
+            label="單元描述"
             type="text"
             fullWidth
             variant="outlined"
@@ -486,8 +485,8 @@ const CourseEditor = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setUnitDialogOpen(false)}>Cancel</Button>
-          <Button onClick={handleSaveUnit} variant="contained">Save</Button>
+          <Button onClick={() => setUnitDialogOpen(false)}>取消</Button>
+          <Button onClick={handleSaveUnit} variant="contained">儲存</Button>
         </DialogActions>
       </Dialog>
       
@@ -497,20 +496,20 @@ const CourseEditor = () => {
         onClose={() => setDeleteDialogOpen(false)}
       >
         <DialogTitle>
-          {`Delete ${deleteType.charAt(0).toUpperCase() + deleteType.slice(1)}?`}
+          {`刪除 ${deleteType === 'unit' ? '單元' : '課時'}？`}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
             {deleteType === 'unit' 
-              ? `Are you sure you want to delete the unit "${itemToDelete?.title}"? This will also delete all lessons within this unit.`
-              : `Are you sure you want to delete the lesson "${itemToDelete?.title}"?`
+              ? `您確定要刪除單元「${itemToDelete?.title}」嗎？這將同時刪除此單元中的所有課時。`
+              : `您確定要刪除課時「${itemToDelete?.title}」嗎？`
             }
-            This action cannot be undone.
+            此操作無法撤銷。
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
-          <Button onClick={handleDeleteConfirm} color="error">Delete</Button>
+          <Button onClick={() => setDeleteDialogOpen(false)}>取消</Button>
+          <Button onClick={handleDeleteConfirm} color="error">刪除</Button>
         </DialogActions>
       </Dialog>
     </Container>

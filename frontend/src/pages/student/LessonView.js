@@ -78,7 +78,7 @@ const LessonView = () => {
             test_code: lessonData.content.test_code || ''
           }];
           // 初始化编码器内容
-          setCode(lessonData.content.starter_code || '# Write your code here\n');
+          setCode(lessonData.content.starter_code || '# 在這裡編寫您的代碼\n');
         } 
         else if (lessonData.content_type === 'multiple_choice') {
           adaptedLesson.multiple_choice_questions = [{
@@ -101,7 +101,7 @@ const LessonView = () => {
         
         setLesson(adaptedLesson);
       } catch (err) {
-        setError('Failed to load lesson data');
+        setError('載入課程資料失敗');
         console.error(err);
       } finally {
         setLoading(false);
@@ -169,12 +169,37 @@ const LessonView = () => {
       }
     } catch (error) {
       console.error('Error running code:', error);
-      setCodeOutput(error.response?.data?.error || error.message || '提交代碼時發生錯誤');
-      setSnackbar({
-        open: true,
-        message: '執行代碼出錯',
-        severity: 'error'
-      });
+      
+      // 處理 422 錯誤（通常是認證問題）
+      if (error.response?.status === 422) {
+        setCodeOutput('認證錯誤：請重新登入');
+        setSnackbar({
+          open: true,
+          message: '認證已過期，請重新登入',
+          severity: 'error'
+        });
+        // 可選：自動導向登入頁面
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000);
+      } else if (error.response?.status === 401) {
+        setCodeOutput('未授權：請重新登入');
+        setSnackbar({
+          open: true,
+          message: '請先登入才能提交代碼',
+          severity: 'error'
+        });
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000);
+      } else {
+        setCodeOutput(error.response?.data?.error || error.message || '提交代碼時發生錯誤');
+        setSnackbar({
+          open: true,
+          message: error.response?.data?.error || '執行代碼出錯',
+          severity: 'error'
+        });
+      }
     } finally {
       setCodeRunning(false);
     }
@@ -285,21 +310,21 @@ const LessonView = () => {
   if (!lesson) {
     return (
       <Container maxWidth="lg" sx={{ mt: 4 }}>
-        <Alert severity="error">Lesson not found or you don't have access to this lesson.</Alert>
+        <Alert severity="error">課程不存在或您沒有訪問此課程的權限。</Alert>
       </Container>
     );
   }
 
   const steps = [
-    { label: 'Coding Exercise', icon: <Code /> },
-    { label: 'Multiple Choice', icon: <QuestionAnswer /> },
-    { label: 'Fill in the Blanks', icon: <TextFields /> }
+    { label: '編碼練習', icon: <Code /> },
+    { label: '選擇題', icon: <QuestionAnswer /> },
+    { label: '填空題', icon: <TextFields /> }
   ];
 
   // Render the text with blanks for the fill-in-the-blank exercise
   const renderTextWithBlanks = () => {
     if (!lesson.fill_blank_exercises || lesson.fill_blank_exercises.length === 0) {
-      return <Typography>No fill-in-the-blank exercise available.</Typography>;
+      return <Typography>沒有可用的填空練習。</Typography>;
     }
     
     const exercise = lesson.fill_blank_exercises[0];
@@ -371,7 +396,7 @@ const LessonView = () => {
           {activeStep === 0 && (
             <Box>
               <Typography variant="h6" gutterBottom>
-                Coding Exercise
+                編碼練習
               </Typography>
               
               {((lesson.content_type === 'coding' && lesson.content) || (lesson.coding_exercises && lesson.coding_exercises.length > 0)) ? (
@@ -379,7 +404,7 @@ const LessonView = () => {
                   <Card variant="outlined" sx={{ mb: 3 }}>
                     <CardContent>
                       <Typography variant="body1" gutterBottom>
-                        <strong>Instructions:</strong>
+                        <strong>指令：</strong>
                       </Typography>
                       <Typography variant="body2">
                         {lesson.content_type === 'coding' ? lesson.content.instructions : lesson.coding_exercises[0].instructions}
@@ -388,7 +413,7 @@ const LessonView = () => {
                   </Card>
                   
                   <Typography variant="subtitle1" gutterBottom>
-                    Your Code:
+                    您的代碼：
                   </Typography>
                   <Box className="code-editor" sx={{ mb: 2 }}>
                     <CodeMirror
@@ -471,7 +496,7 @@ const LessonView = () => {
                   )}
                 </>
               ) : (
-                <Alert severity="info">No coding exercise available for this lesson.</Alert>
+                <Alert severity="info">沒有可用的編碼練習。</Alert>
               )}
             </Box>
           )}
@@ -479,7 +504,7 @@ const LessonView = () => {
           {activeStep === 1 && (
             <Box>
               <Typography variant="h6" gutterBottom>
-                Multiple Choice
+                選擇題
               </Typography>
               
               {((lesson.content_type === 'multiple_choice' && lesson.content) || (lesson.multiple_choice_questions && lesson.multiple_choice_questions.length > 0)) ? (
@@ -489,7 +514,7 @@ const LessonView = () => {
                     <Card variant="outlined" sx={{ mb: 3 }}>
                       <CardContent>
                         <Typography variant="subtitle1" gutterBottom>
-                          Question: {lesson.content.question}
+                          問題：{lesson.content.question}
                         </Typography>
                         
                         <FormControl component="fieldset" sx={{ width: '100%', mt: 2 }}>
@@ -518,7 +543,7 @@ const LessonView = () => {
                         <Card key={question.id || qIndex} variant="outlined" sx={{ mb: 3 }}>
                           <CardContent>
                             <Typography variant="subtitle1" gutterBottom>
-                              Question {qIndex + 1}: {question.question_text}
+                              問題 {qIndex + 1}：{question.question_text}
                             </Typography>
                             
                             <FormControl component="fieldset" sx={{ width: '100%', mt: 2 }}>
@@ -548,11 +573,11 @@ const LessonView = () => {
                     onClick={submitMultipleChoice}
                     sx={{ mt: 2 }}
                   >
-                    Submit Answers
+                    提交答案
                   </Button>
                 </>
               ) : (
-                <Alert severity="info">No multiple choice questions available for this lesson.</Alert>
+                <Alert severity="info">沒有可用的選擇題。</Alert>
               )}
             </Box>
           )}
@@ -560,7 +585,7 @@ const LessonView = () => {
           {activeStep === 2 && (
             <Box>
               <Typography variant="h6" gutterBottom>
-                Fill in the Blanks
+                填空題
               </Typography>
               
               {((lesson.content_type === 'fill_in_blank' && lesson.content) || (lesson.fill_blank_exercises && lesson.fill_blank_exercises.length > 0)) ? (
@@ -568,7 +593,7 @@ const LessonView = () => {
                   <Card variant="outlined" sx={{ mb: 3 }}>
                     <CardContent>
                       <Typography variant="body1" gutterBottom>
-                        <strong>Instructions:</strong> Fill in the blanks in the text below.
+                        <strong>指令：</strong> 填空題的指令。
                       </Typography>
                       
                       <Box sx={{ mt: 3, p: 2, bgcolor: '#f9f9f9', borderRadius: 1 }}>
@@ -582,7 +607,7 @@ const LessonView = () => {
                   </Card>
                   
                   <Typography variant="subtitle1" gutterBottom>
-                    Available Options:
+                    可用選項：
                   </Typography>
                   
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 3 }}>
@@ -591,7 +616,7 @@ const LessonView = () => {
                       lesson.content.blanks && lesson.content.blanks.map((blank, blankIndex) => (
                         <Box key={blankIndex} sx={{ mb: 2 }}>
                           <Typography variant="body2" sx={{ mb: 1 }}>
-                            填空 {blankIndex + 1}: {blank}
+                            填空 {blankIndex + 1}：{blank}
                           </Typography>
                           <TextField 
                             variant="outlined" 
@@ -609,7 +634,7 @@ const LessonView = () => {
                     : blanks.map((blank, blankIndex) => (
                       <Box key={blankIndex} sx={{ mb: 2 }}>
                         <Typography variant="body2" sx={{ mb: 1 }}>
-                          Options for blank {blankIndex + 1}:
+                          填空 {blankIndex + 1} 的選項：
                         </Typography>
                         {blank.options && blank.options.map((option, optionIndex) => (
                           <Draggable
@@ -640,11 +665,11 @@ const LessonView = () => {
                     onClick={submitFillBlanks}
                     sx={{ mt: 2 }}
                   >
-                    Submit Answers
+                    提交答案
                   </Button>
                 </DragDropContext>
               ) : (
-                <Alert severity="info">No fill-in-the-blank exercise available for this lesson.</Alert>
+                <Alert severity="info">此課程沒有可用的填空練習。</Alert>
               )}
             </Box>
           )}
@@ -666,7 +691,7 @@ const LessonView = () => {
             onClick={activeStep === steps.length - 1 ? () => navigate(-1) : handleNext}
             endIcon={activeStep === steps.length - 1 ? <Check /> : <ArrowForward />}
           >
-            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+            {activeStep === steps.length - 1 ? '完成' : '下一步'}
           </Button>
         </Box>
       </Box>

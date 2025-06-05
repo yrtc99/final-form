@@ -69,7 +69,7 @@ const StudentDashboard = () => {
 
   const fetchDashboardData = useCallback(async () => {
     if (!currentUser || !currentUser.id) {
-      setError('User not identified. Cannot load dashboard data.');
+      setError('用戶未識別。無法載入儀表板數據。');
       setLoading(false);
       return;
     }
@@ -97,7 +97,7 @@ const StudentDashboard = () => {
       setEnrolledCourses(enrolledCoursesResponse.data.courses || []);
       
     } catch (err) {
-      setError('Failed to load dashboard data. Please try refreshing the page.');
+      setError('載入儀表板數據失敗。請嘗試刷新頁面。');
       console.error("Error fetching dashboard/activity data:", err.response || err.message || err);
     } finally {
       setLoading(false);
@@ -122,10 +122,10 @@ const StudentDashboard = () => {
 
   // Create chart data for the progress graph
   const progressData = {
-    labels: dashboardData?.weekly_progress?.map(item => `Week ${item.week}`) || [],
+    labels: dashboardData?.weekly_progress?.map(item => `第 ${item.week} 週`) || [],
     datasets: [
       {
-        label: 'Lessons Completed',
+        label: '完成的課程',
         data: dashboardData?.weekly_progress?.map(item => item.completed_lessons) || [],
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
@@ -143,7 +143,7 @@ const StudentDashboard = () => {
       },
       title: {
         display: true,
-        text: 'Weekly Progress'
+        text: '每週進度'
       }
     },
     scales: {
@@ -162,7 +162,7 @@ const StudentDashboard = () => {
     labels: dashboardData?.exercise_scores?.map(item => item.exercise_type) || [],
     datasets: [
       {
-        label: 'Average Score (%)',
+        label: '平均分數 (%)',
         data: dashboardData?.exercise_scores?.map(item => item.average_score) || [],
         backgroundColor: [
           'rgba(255, 99, 132, 0.5)',
@@ -182,7 +182,7 @@ const StudentDashboard = () => {
       },
       title: {
         display: true,
-        text: 'Performance by Exercise Type'
+        text: '練習表現'
       }
     },
     scales: {
@@ -203,7 +203,7 @@ const StudentDashboard = () => {
       
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
         <Typography variant="h4">
-          Welcome back, {currentUser?.username || 'Student'}!
+          歡迎回來，{currentUser?.username || '學生'}！
         </Typography>
         <Button 
           variant="contained" 
@@ -211,7 +211,7 @@ const StudentDashboard = () => {
           startIcon={<School />}
           onClick={() => navigate('/student/courses')}
         >
-          My Courses
+          我的課程
         </Button>
       </Box>
       
@@ -221,7 +221,7 @@ const StudentDashboard = () => {
           <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 140 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <Typography color="text.secondary" gutterBottom variant="subtitle2">
-                Enrolled Courses
+                註冊課程
               </Typography>
               <School color="primary" />
             </Box>
@@ -229,7 +229,7 @@ const StudentDashboard = () => {
               {dashboardData?.total_courses_enrolled || 0}
             </Typography>
             <Typography variant="caption" color="text.secondary">
-              {dashboardData?.recently_enrolled ? 'New course enrolled recently' : ''}
+              {dashboardData?.recently_enrolled ? '新課程註冊' : ''}
             </Typography>
           </Paper>
         </Grid>
@@ -237,7 +237,7 @@ const StudentDashboard = () => {
           <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 140 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <Typography color="text.secondary" gutterBottom variant="subtitle2">
-                Completed Lessons
+                完成課程
               </Typography>
               <CheckCircle color="success" />
             </Box>
@@ -245,7 +245,7 @@ const StudentDashboard = () => {
               {dashboardData?.completed_lessons || 0}/{dashboardData?.total_lessons || 0}
             </Typography>
             <Typography variant="caption" color="text.secondary">
-              {Math.round((dashboardData?.completed_lessons / (dashboardData?.total_lessons || 1)) * 100)}% complete
+              {Math.round((dashboardData?.completed_lessons / (dashboardData?.total_lessons || 1)) * 100)}% 完成
             </Typography>
           </Paper>
         </Grid>
@@ -253,7 +253,7 @@ const StudentDashboard = () => {
           <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 140 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <Typography color="text.secondary" gutterBottom variant="subtitle2">
-                Average Score
+                平均分數
               </Typography>
               <Assessment color="primary" />
             </Box>
@@ -261,7 +261,7 @@ const StudentDashboard = () => {
               {dashboardData?.average_score ? `${Math.round(dashboardData?.average_score)}%` : 'N/A'}
             </Typography>
             <Typography variant="caption" color="text.secondary">
-              From all exercises
+              所有練習
             </Typography>
           </Paper>
         </Grid>
@@ -269,15 +269,15 @@ const StudentDashboard = () => {
           <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 140 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <Typography color="text.secondary" gutterBottom variant="subtitle2">
-                Study Streak
+                學習連勝
               </Typography>
               <TrendingUp color="secondary" />
             </Box>
             <Typography component="p" variant="h4" sx={{ flexGrow: 1 }}>
-              {dashboardData?.streak_days || 0} days
+              {dashboardData?.streak_days || 0} 天
             </Typography>
             <Typography variant="caption" color="text.secondary">
-              Keep it going!
+              繼續保持！
             </Typography>
           </Paper>
         </Grid>
@@ -295,7 +295,7 @@ const StudentDashboard = () => {
             }}
           >
             <Typography variant="h6" gutterBottom>
-              Your Learning Progress
+              我的學習進度
             </Typography>
             <Divider sx={{ mb: 2 }} />
             {dashboardData?.weekly_progress?.length ? (
@@ -305,7 +305,7 @@ const StudentDashboard = () => {
             ) : (
               <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                 <Typography variant="body1" color="text.secondary">
-                  No progress data available yet. Start learning!
+                  沒有進度數據。開始學習吧！
                 </Typography>
               </Box>
             )}
@@ -323,7 +323,7 @@ const StudentDashboard = () => {
             }}
           >
             <Typography variant="h6" gutterBottom>
-              Recent Activity
+              最近活動
             </Typography>
             <Divider sx={{ mb: 2 }} />
             
@@ -369,7 +369,7 @@ const StudentDashboard = () => {
             ) : (
               <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                 <Typography variant="body1" color="text.secondary">
-                  No recent activity. Start learning!
+                  最近沒有活動。開始學習吧！
                 </Typography>
               </Box>
             )}
@@ -387,7 +387,7 @@ const StudentDashboard = () => {
             }}
           >
             <Typography variant="h6" gutterBottom>
-              Performance by Exercise Type
+              按練習類型分的表現
             </Typography>
             <Divider sx={{ mb: 2 }} />
             
@@ -398,7 +398,7 @@ const StudentDashboard = () => {
             ) : (
               <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                 <Typography variant="body1" color="text.secondary">
-                  Complete exercises to see your performance analytics.
+                  完成練習以查看您的表現分析。
                 </Typography>
               </Box>
             )}
@@ -409,7 +409,7 @@ const StudentDashboard = () => {
         <Grid item xs={12} md={6}>
           <Paper sx={{ p: 2, height: 400, display: 'flex', flexDirection: 'column' }}>
             <Typography variant="h6" gutterBottom>
-              Continue Learning
+              繼續學習
             </Typography>
             <Divider sx={{ mb: 2 }} />
             
@@ -429,7 +429,7 @@ const StudentDashboard = () => {
                                 {lesson.course_title} • {lesson.unit_title}
                               </Typography>
                               <Typography variant="caption" color="text.secondary" sx={{ mt: 1, display: 'block' }}>
-                                {lesson.status === 'in_progress' ? 'In progress - Continue where you left off' : 'Not started yet'}
+                                {lesson.status === 'in_progress' ? '進行中 - 從上次離開的地方繼續' : '尚未開始'}
                               </Typography>
                             </Box>
                             <Box>
@@ -445,7 +445,7 @@ const StudentDashboard = () => {
             ) : (
               <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                 <Typography variant="body1" color="text.secondary">
-                  No lessons in progress. Start a new lesson!
+                  沒有正在進行的課程。開始新的課程吧！
                 </Typography>
               </Box>
             )}
@@ -456,7 +456,7 @@ const StudentDashboard = () => {
               onClick={() => navigate('/student/courses')}
               sx={{ mt: 'auto' }}
             >
-              See All Courses
+              查看所有課程
             </Button>
           </Paper>
         </Grid>

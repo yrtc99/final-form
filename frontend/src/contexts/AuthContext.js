@@ -14,48 +14,40 @@ export function AuthProvider({ children }) {
 
   // Check if user is already logged in (from localStorage)
   useEffect(() => {
-    const token = localStorage.getItem('token');
     const userData = localStorage.getItem('user');
     
-    if (token && userData) {
-      // Set axios default header for all requests
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    if (userData) {
       setCurrentUser(JSON.parse(userData));
     }
     
     setLoading(false);
   }, []);
 
-  // Login function
+  // Login function - 簡化版，不使用 JWT
   const login = async (username, password) => {
     try {
       setError('');
       const response = await axios.post('/api/auth/login', { username, password });
       
-      const { access_token, user } = response.data;
+      const { user } = response.data;
       
-      // Save to localStorage
-      localStorage.setItem('token', access_token);
+      // 只保存用戶信息，不保存 token
       localStorage.setItem('user', JSON.stringify(user));
-      
-      // Set axios default header for all requests
-      axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
       
       setCurrentUser(user);
       return user;
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to login');
+      setError(err.response?.data?.error || '登入失敗');
       throw err;
     }
   };
 
-  // Register function
+  // Register function - 簡化版
   const register = async (username, password, role) => {
     try {
       setError('');
       console.log('Sending registration request with data:', { username, password, role });
       
-      // Set explicit URL to avoid proxy issues
       const response = await axios.post('http://localhost:5000/api/auth/register', {
         username,
         password,
@@ -66,26 +58,30 @@ export function AuthProvider({ children }) {
       return response.data;
     } catch (err) {
       console.error('Registration error:', err);
-      const errorMessage = err.response?.data?.error || 'Failed to register';
+      const errorMessage = err.response?.data?.error || '註冊失敗';
       console.error('Error details:', errorMessage);
       setError(errorMessage);
       throw err;
     }
   };
 
-  // Logout function
+  // Logout function - 簡化版
   const logout = () => {
-    localStorage.removeItem('token');
     localStorage.removeItem('user');
-    delete axios.defaults.headers.common['Authorization'];
     setCurrentUser(null);
   };
 
-  // Update profile function
+  // Update profile function - 簡化版
   const updateProfile = async (userData) => {
     try {
       setError('');
-      const response = await axios.put('/api/auth/profile', userData);
+      // 添加當前用戶 ID 到請求
+      const requestData = {
+        ...userData,
+        user_id: currentUser.id
+      };
+      
+      const response = await axios.put('/api/auth/profile', requestData);
       
       const updatedUser = response.data.user;
       
@@ -95,23 +91,24 @@ export function AuthProvider({ children }) {
       setCurrentUser(updatedUser);
       return updatedUser;
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to update profile');
+      setError(err.response?.data?.error || '更新個人資料失敗');
       throw err;
     }
   };
 
-  // Change password function
+  // Change password function - 簡化版
   const changePassword = async (currentPassword, newPassword) => {
     try {
       setError('');
       const response = await axios.put('/api/auth/change-password', {
         current_password: currentPassword,
-        new_password: newPassword
+        new_password: newPassword,
+        user_id: currentUser.id
       });
       
       return response.data;
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to change password');
+      setError(err.response?.data?.error || '更改密碼失敗');
       throw err;
     }
   };

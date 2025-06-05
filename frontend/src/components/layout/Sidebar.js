@@ -37,18 +37,18 @@ const Sidebar = ({ open, toggleDrawer }) => {
   const isTeacher = currentUser?.role === 'teacher';
   
   const teacherMenuItems = [
-    { text: 'Dashboard', icon: <Dashboard />, path: '/teacher/dashboard' },
-    { text: 'Courses', icon: <School />, path: '/teacher/courses' },
-    { text: 'Students', icon: <People />, path: '/teacher/students' },
-    { text: 'Student Progress', icon: <Analytics />, path: '/teacher/students' },
+    { text: '儀表板', icon: <Dashboard />, path: '/teacher/dashboard' },
+    { text: '課程管理', icon: <School />, path: '/teacher/courses' },
+    { text: '學生管理', icon: <People />, path: '/teacher/students' },
+    { text: '學生進度', icon: <Analytics />, path: '/teacher/students' },
   ];
   
   const studentMenuItems = [
-    { text: 'Dashboard', icon: <Dashboard />, path: '/student/dashboard' },
-    { text: 'My Courses', icon: <MenuBook />, path: '/student/courses' },
-    { text: 'My Progress', icon: <Analytics />, path: '/student/progress' },
-    { text: 'Achievements', icon: <EmojiEvents />, path: '/student/achievements' },
-    { text: 'Feedback', icon: <QuestionAnswer />, path: '/student/feedback' },
+    { text: '儀表板', icon: <Dashboard />, path: '/student/dashboard' },
+    { text: '我的課程', icon: <MenuBook />, path: '/student/courses' },
+    { text: '我的進度', icon: <Analytics />, path: '/student/progress' },
+    { text: '成就', icon: <EmojiEvents />, path: '/student/achievements' },
+    { text: '反饋', icon: <QuestionAnswer />, path: '/student/feedback' },
   ];
   
   const menuItems = isTeacher ? teacherMenuItems : studentMenuItems;
@@ -94,13 +94,13 @@ const Sidebar = ({ open, toggleDrawer }) => {
           <ListItem disablePadding>
             <ListItemButton onClick={() => navigate(isTeacher ? '/teacher/profile' : '/student/profile')}>
               <ListItemIcon><Person /></ListItemIcon>
-              <ListItemText primary="My Profile" />
+              <ListItemText primary="我的個人資料" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
             <ListItemButton onClick={() => navigate(isTeacher ? '/teacher/settings' : '/student/settings')}>
               <ListItemIcon><Settings /></ListItemIcon>
-              <ListItemText primary="Settings" />
+              <ListItemText primary="設定" />
             </ListItemButton>
           </ListItem>
         </List>

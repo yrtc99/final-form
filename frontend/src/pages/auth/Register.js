@@ -43,17 +43,17 @@ const Register = () => {
     
     // Form validation
     if (!username || !password || !confirmPassword) {
-      setError('Please fill in all fields');
+      setError('請填寫所有欄位');
       return;
     }
     
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError('密碼不相符');
       return;
     }
     
     if (password.length < 6) {
-      setError('Password must be at least 6 characters long');
+      setError('密碼長度至少為 6 個字元');
       return;
     }
     
@@ -63,7 +63,7 @@ const Register = () => {
       await register(username, password, role);
       navigate('/login');
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to register');
+      setError(err.response?.data?.error || '註冊失敗');
     } finally {
       setLoading(false);
     }
@@ -81,10 +81,10 @@ const Register = () => {
       >
         <Paper elevation={3} sx={{ p: 4, width: '100%' }}>
           <Typography component="h1" variant="h5" align="center" gutterBottom>
-            Python Learning Platform
+            Python 學習平台
           </Typography>
           <Typography component="h2" variant="h6" align="center" sx={{ mb: 3 }}>
-            Create Account
+            建立帳戶
           </Typography>
           
           {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
@@ -95,7 +95,7 @@ const Register = () => {
               required
               fullWidth
               id="username"
-              label="Username"
+              label="用戶名"
               name="username"
               autoComplete="username"
               autoFocus
@@ -109,7 +109,7 @@ const Register = () => {
               required
               fullWidth
               name="password"
-              label="Password"
+              label="密碼"
               type={showPassword ? 'text' : 'password'}
               id="password"
               autoComplete="new-password"
@@ -120,7 +120,7 @@ const Register = () => {
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
-                      aria-label="toggle password visibility"
+                      aria-label="切換密碼可見性"
                       onClick={handleClickShowPassword}
                       edge="end"
                     >
@@ -135,7 +135,7 @@ const Register = () => {
               required
               fullWidth
               name="confirmPassword"
-              label="Confirm Password"
+              label="確認密碼"
               type={showConfirmPassword ? 'text' : 'password'}
               id="confirmPassword"
               value={confirmPassword}
@@ -145,7 +145,7 @@ const Register = () => {
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
-                      aria-label="toggle confirm password visibility"
+                      aria-label="切換確認密碼可見性"
                       onClick={handleClickShowConfirmPassword}
                       edge="end"
                     >
@@ -157,7 +157,7 @@ const Register = () => {
             />
             
             <FormControl component="fieldset" sx={{ mt: 2, width: '100%' }}>
-              <FormLabel component="legend">I am a:</FormLabel>
+              <FormLabel component="legend">我的身份是：</FormLabel>
               <RadioGroup
                 row
                 aria-label="role"
@@ -165,8 +165,8 @@ const Register = () => {
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
               >
-                <FormControlLabel value="student" control={<Radio />} label="Student" />
-                <FormControlLabel value="teacher" control={<Radio />} label="Teacher" />
+                <FormControlLabel value="student" control={<Radio />} label="學生" />
+                <FormControlLabel value="teacher" control={<Radio />} label="老師" />
               </RadioGroup>
             </FormControl>
             
@@ -177,11 +177,11 @@ const Register = () => {
               sx={{ mt: 3, mb: 2 }}
               disabled={loading}
             >
-              {loading ? <CircularProgress size={24} /> : 'Register'}
+              {loading ? <CircularProgress size={24} /> : '註冊'}
             </Button>
             <Box sx={{ textAlign: 'center' }}>
               <Link component={RouterLink} to="/login" variant="body2">
-                {"Already have an account? Log In"}
+                {"已經有帳戶了？ 登入"}
               </Link>
             </Box>
           </Box>

@@ -1,5 +1,4 @@
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required, get_jwt_identity
 from backend.models.user import User
 from backend.models.lesson import Lesson
 from backend.models.progress import Progress, SubmissionHistory
@@ -92,7 +91,6 @@ def execute_python_code(code):
                 remove=True,  # 执行完自动删除
                 stdout=True,
                 stderr=True
-                # 移除所有可能不兼容的参数
             )
             
             # 获取输出 - result 已经是字节串
@@ -160,18 +158,20 @@ def run_code():
         }), 400
 
 @bp.route('/submit/<int:lesson_id>', methods=['POST'])
-@jwt_required()
 def submit_code(lesson_id):
     """提交编程作业并自动评分"""
-    current_user = get_jwt_identity()
-    user_id = current_user['id']
+    # 移除JWT认证，使用固定的学生ID（在实际应用中可能需要其他方式获取）
+    # 为了简化，这里使用请求中的 student_id 参数
+    data = request.get_json()
+    
+    # 从请求中获取 student_id，如果没有则使用默认值 1
+    user_id = data.get('student_id', 1)
     
     # 验证用户
     user = User.query.get(user_id)
     if not user or not user.is_student():
         return jsonify({'error': 'Only students can submit solutions'}), 403
     
-    data = request.get_json()
     if not data or 'code' not in data:
         return jsonify({'error': 'No code submitted'}), 400
     

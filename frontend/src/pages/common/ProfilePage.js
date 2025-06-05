@@ -82,7 +82,7 @@ const ProfilePage = () => {
       }, 3000);
       
     } catch (error) {
-      setProfileError(error.response?.data?.error || 'Failed to update profile');
+      setProfileError(error.response?.data?.error || '更新個人資料失敗');
     } finally {
       setLoading(false);
     }
@@ -92,7 +92,7 @@ const ProfilePage = () => {
     e.preventDefault();
     
     if (passwordData.newPassword !== passwordData.confirmPassword) {
-      setPasswordError('New passwords do not match');
+      setPasswordError('新密碼不相符');
       return;
     }
     
@@ -120,7 +120,7 @@ const ProfilePage = () => {
       }, 3000);
       
     } catch (error) {
-      setPasswordError(error.response?.data?.error || 'Failed to change password');
+      setPasswordError(error.response?.data?.error || '更改密碼失敗');
     } finally {
       setLoading(false);
     }
@@ -137,7 +137,7 @@ const ProfilePage = () => {
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 8 }}>
       <Typography variant="h4" gutterBottom>
-        My Profile
+        我的個人資料
       </Typography>
       
       <Grid container spacing={4}>
@@ -170,7 +170,7 @@ const ProfilePage = () => {
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
-                    label="Username"
+                    label="用戶名"
                     name="username"
                     value={profileData.username}
                     onChange={handleProfileChange}
@@ -182,7 +182,7 @@ const ProfilePage = () => {
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
-                    label="Email"
+                    label="電子郵件"
                     name="email"
                     value={profileData.email}
                     onChange={handleProfileChange}
@@ -203,7 +203,7 @@ const ProfilePage = () => {
                     multiline
                     rows={4}
                     disabled={loading}
-                    helperText="Tell us about yourself (optional)"
+                    helperText="請簡短介紹自己 (選填)"
                   />
                 </Grid>
                 
@@ -216,7 +216,7 @@ const ProfilePage = () => {
                     disabled={loading}
                     fullWidth
                   >
-                    {loading ? 'Saving...' : 'Save Changes'}
+                    {loading ? '儲存中...' : '儲存變更'}
                   </Button>
                 </Grid>
               </Grid>
@@ -228,7 +228,7 @@ const ProfilePage = () => {
         <Grid item xs={12} md={5}>
           <Paper sx={{ p: 4, height: '100%' }}>
             <Typography variant="h6" gutterBottom>
-              Change Password
+              更改密碼
             </Typography>
             <Divider sx={{ mb: 3 }} />
             
@@ -243,7 +243,7 @@ const ProfilePage = () => {
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
-                    label="Current Password"
+                    label="目前密碼"
                     name="currentPassword"
                     value={passwordData.currentPassword}
                     onChange={handlePasswordChange}
@@ -257,7 +257,7 @@ const ProfilePage = () => {
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
-                    label="New Password"
+                    label="新密碼"
                     name="newPassword"
                     value={passwordData.newPassword}
                     onChange={handlePasswordChange}
@@ -271,7 +271,7 @@ const ProfilePage = () => {
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
-                    label="Confirm New Password"
+                    label="確認新密碼"
                     name="confirmPassword"
                     value={passwordData.confirmPassword}
                     onChange={handlePasswordChange}
@@ -280,7 +280,7 @@ const ProfilePage = () => {
                     required
                     disabled={loading}
                     error={passwordData.newPassword !== passwordData.confirmPassword && passwordData.confirmPassword !== ''}
-                    helperText={passwordData.newPassword !== passwordData.confirmPassword && passwordData.confirmPassword !== '' ? 'Passwords do not match' : ''}
+                    helperText={passwordData.newPassword !== passwordData.confirmPassword && passwordData.confirmPassword !== '' ? '密碼不相符' : ''}
                   />
                 </Grid>
                 
@@ -293,7 +293,7 @@ const ProfilePage = () => {
                     disabled={loading}
                     fullWidth
                   >
-                    {loading ? 'Updating...' : 'Change Password'}
+                    {loading ? 'Updating...' : '更改密碼'}
                   </Button>
                 </Grid>
               </Grid>
@@ -310,7 +310,7 @@ const ProfilePage = () => {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
         <Alert severity="success" sx={{ width: '100%' }}>
-          Profile updated successfully!
+          個人資料更新成功！
         </Alert>
       </Snackbar>
       
@@ -321,7 +321,7 @@ const ProfilePage = () => {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
         <Alert severity="success" sx={{ width: '100%' }}>
-          Password changed successfully!
+          密碼更改成功！
         </Alert>
       </Snackbar>
     </Container>

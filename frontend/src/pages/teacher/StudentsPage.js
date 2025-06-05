@@ -35,7 +35,7 @@ const StudentsPage = () => {
         setError('');
       } catch (err) {
         console.error('Error fetching students:', err);
-        setError('Failed to load students: ' + (err.response?.data?.error || 'Please try again later'));
+        setError('載入學生列表失敗：' + (err.response?.data?.error || '請稍後再試'));
       } finally {
         setLoading(false);
       }
@@ -51,10 +51,10 @@ const StudentsPage = () => {
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Typography variant="h4" gutterBottom>
-        All Students
+        所有學生
       </Typography>
       <Typography variant="body1" paragraph color="text.secondary">
-        View all students registered in the system. These students can be added to your courses.
+        查看系統中所有已註冊的學生。這些學生可以被添加到您的課程中。
       </Typography>
       
       {error && <Alert severity="error" sx={{ mb: 3 }}>{error}</Alert>}
@@ -64,7 +64,7 @@ const StudentsPage = () => {
           <TextField
             fullWidth
             variant="outlined"
-            placeholder="Search students by username..."
+            placeholder="按用戶名搜索學生..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             InputProps={{
@@ -89,9 +89,9 @@ const StudentsPage = () => {
                   <TableHead>
                     <TableRow>
                       <TableCell>ID</TableCell>
-                      <TableCell>Username</TableCell>
-                      <TableCell>Email</TableCell>
-                      <TableCell>Joined</TableCell>
+                      <TableCell>用戶名</TableCell>
+                      <TableCell>電子郵件</TableCell>
+                      <TableCell>加入日期</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -99,9 +99,9 @@ const StudentsPage = () => {
                       <TableRow key={student.id}>
                         <TableCell>{student.id}</TableCell>
                         <TableCell>{student.username}</TableCell>
-                        <TableCell>{student.email || 'N/A'}</TableCell>
+                        <TableCell>{student.email || '無'}</TableCell>
                         <TableCell>
-                          {student.created_at ? new Date(student.created_at).toLocaleDateString() : 'N/A'}
+                          {student.created_at ? new Date(student.created_at).toLocaleDateString() : '無'}
                         </TableCell>
                       </TableRow>
                     ))}
@@ -110,12 +110,12 @@ const StudentsPage = () => {
               </TableContainer>
             ) : (
               <Alert severity="info">
-                No students found {searchTerm && "matching your search criteria"}.
+                找不到學生{searchTerm && "符合您的搜索條件"}。
               </Alert>
             )}
             <Box sx={{ mt: 2 }}>
               <Typography variant="caption" color="text.secondary">
-                Showing {filteredStudents.length} of {students.length} students
+                顯示 {filteredStudents.length} / {students.length} 個學生
               </Typography>
             </Box>
           </>

@@ -23,7 +23,7 @@ const CourseList = () => {
 
   const fetchCourses = useCallback(async () => {
     if (!currentUser) {
-      setError('Please log in to view your courses.');
+      setError('請登入以查看您的課程。');
       setLoading(false);
       return;
     }
@@ -34,7 +34,7 @@ const CourseList = () => {
       setCourses(response.data.courses);
     } catch (err) {
       console.error("Error fetching enrolled courses:", err);
-      setError(err.response?.data?.error || 'Failed to fetch enrolled courses. Please try again later.');
+      setError(err.response?.data?.error || '無法獲取已註冊的課程。請稍後再試。');
     } finally {
       setLoading(false);
     }
@@ -63,11 +63,11 @@ const CourseList = () => {
   return (
     <Container sx={{ py: 4 }}>
       <Typography variant="h4" component="h1" gutterBottom>
-        My Courses
+        我的課程
       </Typography>
       {courses.length === 0 ? (
         <Typography variant="subtitle1">
-          You are not enrolled in any courses yet.
+          您尚未註冊任何課程。
         </Typography>
       ) : (
         <Grid container spacing={4}>
@@ -102,11 +102,11 @@ const CourseList = () => {
                     {course.title}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {course.description || 'No description available.'}
+                    {course.description || '目前沒有描述。'}
                   </Typography>
                   <Box sx={{ mt: 1 }}>
                     <Typography variant="caption" color="text.secondary">
-                      Enrolled: {new Date(course.enrolled_at).toLocaleDateString()}
+                      註冊於：{new Date(course.enrolled_at).toLocaleDateString()}
                     </Typography>
                   </Box>
                 </CardContent>
@@ -118,7 +118,7 @@ const CourseList = () => {
                     color="primary"
                     fullWidth
                   >
-                    View Course
+                    查看課程
                   </Button>
                 </Box>
               </Card>

@@ -26,7 +26,7 @@ const Login = () => {
     e.preventDefault();
     
     if (!username || !password) {
-      setError('Please enter both username and password');
+      setError('請輸入用戶名和密碼');
       return;
     }
     
@@ -42,7 +42,7 @@ const Login = () => {
         navigate('/student/dashboard');
       }
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to log in');
+      setError(err.response?.data?.error || '登入失敗');
     } finally {
       setLoading(false);
     }
@@ -60,10 +60,10 @@ const Login = () => {
       >
         <Paper elevation={3} sx={{ p: 4, width: '100%' }}>
           <Typography component="h1" variant="h5" align="center" gutterBottom>
-            Python Learning Platform
+            Python 學習平台
           </Typography>
           <Typography component="h2" variant="h6" align="center" sx={{ mb: 3 }}>
-            Log In
+            登入
           </Typography>
           
           {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
@@ -74,7 +74,7 @@ const Login = () => {
               required
               fullWidth
               id="username"
-              label="Username"
+              label="用戶名"
               name="username"
               autoComplete="username"
               autoFocus
@@ -87,7 +87,7 @@ const Login = () => {
               required
               fullWidth
               name="password"
-              label="Password"
+              label="密碼"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -102,11 +102,11 @@ const Login = () => {
               sx={{ mt: 3, mb: 2 }}
               disabled={loading}
             >
-              {loading ? <CircularProgress size={24} /> : 'Log In'}
+              {loading ? <CircularProgress size={24} /> : '登入'}
             </Button>
             <Box sx={{ textAlign: 'center' }}>
               <Link component={RouterLink} to="/register" variant="body2">
-                {"Don't have an account? Sign Up"}
+                {"還沒有帳戶？ 註冊"}
               </Link>
             </Box>
           </Box>

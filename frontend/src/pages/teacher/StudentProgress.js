@@ -59,6 +59,24 @@ ChartJS.register(
   Legend
 );
 
+const translateStatusOrType = (text) => {
+  if (!text) return '無';
+  const lowerText = String(text).toLowerCase().replace('_', ' ');
+  const map = {
+    'completed': '已完成',
+    'in progress': '進行中',
+    'not started': '未開始',
+    'passed': '已通過',
+    'failed': '未通過',
+    'submitted': '已提交',
+    'coding': '編程',
+    'multiple choice': '選擇題',
+    'quiz': '測驗',
+    'assignment': '作業'
+  };
+  return map[lowerText] || (String(text).charAt(0).toUpperCase() + String(text).slice(1).replace('_', ' '));
+};
+
 const StudentProgress = () => {
   const { studentId } = useParams();
   const [student, setStudent] = useState(null);
@@ -102,7 +120,7 @@ const StudentProgress = () => {
       setCourses(enrollmentResponse.data.courses);
       
     } catch (err) {
-      setError('Failed to load student data');
+      setError('載入學生資料失敗');
       console.error(err);
     } finally {
       setLoading(false);
@@ -118,7 +136,7 @@ const StudentProgress = () => {
       setProgressData(progressResponse.data);
       
     } catch (err) {
-      setError('Failed to load progress data');
+      setError('載入進度資料失敗');
       console.error(err);
     } finally {
       setLoading(false);
@@ -144,7 +162,7 @@ const StudentProgress = () => {
       labels: dates,
       datasets: [
         {
-          label: 'Course Completion %',
+          label: '課程完成度 %',
           data: completionValues,
           borderColor: 'rgb(75, 192, 192)',
           backgroundColor: 'rgba(75, 192, 192, 0.5)',
@@ -165,7 +183,7 @@ const StudentProgress = () => {
       labels: lessonTypes.map(type => type.charAt(0).toUpperCase() + type.slice(1)),
       datasets: [
         {
-          label: 'Average Score %',
+          label: '平均得分 %',
           data: scores,
           backgroundColor: [
             'rgba(255, 99, 132, 0.5)',
@@ -207,8 +225,8 @@ const StudentProgress = () => {
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Box sx={{ mb: 4 }}>
         <Typography variant="h4" gutterBottom>
-          Student Progress
-        </Typography>
+        {student ? `${student.username} 的進度` : '學生進度'}
+      </Typography>
         {student && (
           <Typography variant="h6" color="text.secondary">
             {student.username} ({student.email})
@@ -219,18 +237,16 @@ const StudentProgress = () => {
       {error && <Alert severity="error" sx={{ mb: 3 }}>{error}</Alert>}
       
       {courses.length === 0 ? (
-        <Alert severity="info">
-          This student is not enrolled in any courses yet.
-        </Alert>
+        <Alert severity="info">此學生尚未註冊任何課程。</Alert>
       ) : (
         <>
           <Paper sx={{ p: 3, mb: 3 }}>
             <FormControl fullWidth>
-              <InputLabel id="course-select-label">Select Course</InputLabel>
+              <InputLabel id="course-select-label">選擇課程：</InputLabel>
               <Select
                 labelId="course-select-label"
                 value={selectedCourse}
-                label="Select Course"
+                label='選擇課程'
                 onChange={handleCourseChange}
                 disabled={loading}
               >
@@ -257,9 +273,9 @@ const StudentProgress = () => {
                   textColor="primary"
                   centered
                 >
-                  <Tab label="Overview" />
-                  <Tab label="Lessons" />
-                  <Tab label="Exercises" />
+                  <Tab label='總覽' />
+                  <Tab label='課時' />
+                  <Tab label='練習' />
                 </Tabs>
               </Paper>
               
@@ -270,9 +286,7 @@ const StudentProgress = () => {
                     <Grid item xs={12} md={4}>
                       <Card>
                         <CardContent>
-                          <Typography variant="h6" gutterBottom>
-                            Course Completion
-                          </Typography>
+                          <Typography variant="h6" gutterBottom>課程完成度</Typography>
                           <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
                             <Box sx={{ width: '100%', mr: 1 }}>
                               <LinearProgress 
@@ -282,8 +296,8 @@ const StudentProgress = () => {
                               />
                             </Box>
                             <Typography variant="body2" color="text.secondary">
-                              {`${Math.round(progressData.overview.completion_percentage || 0)}%`}
-                            </Typography>
+                    {`${Math.round(progressData.overview.completion_percentage || 0)}% 已完成`}
+                  </Typography>
                           </Box>
                           <Typography variant="body2" color="text.secondary">
                             {`${progressData.overview.completed_lessons || 0} of ${progressData.overview.total_lessons || 0} lessons completed`}
@@ -294,9 +308,7 @@ const StudentProgress = () => {
                     <Grid item xs={12} md={4}>
                       <Card>
                         <CardContent>
-                          <Typography variant="h6" gutterBottom>
-                            Average Score
-                          </Typography>
+                          <Typography variant="h6" gutterBottom>平均得分</Typography>
                           <Typography variant="h3" align="center" color="primary">
                             {progressData.overview.average_score || 0}%
                           </Typography>
@@ -309,9 +321,7 @@ const StudentProgress = () => {
                     <Grid item xs={12} md={4}>
                       <Card>
                         <CardContent>
-                          <Typography variant="h6" gutterBottom>
-                            Last Activity
-                          </Typography>
+                          <Typography variant="h6" gutterBottom>最近活動</Typography>
                           {progressData.overview.last_activity ? (
                             <>
                               <Typography variant="body1">
@@ -322,9 +332,7 @@ const StudentProgress = () => {
                               </Typography>
                             </>
                           ) : (
-                            <Typography variant="body2" color="text.secondary">
-                              No activity recorded yet
-                            </Typography>
+                            <Typography variant="body2" color="text.secondary">尚無活動記錄</Typography>
                           )}
                         </CardContent>
                       </Card>
@@ -334,9 +342,7 @@ const StudentProgress = () => {
                   <Grid container spacing={3}>
                     <Grid item xs={12} md={6}>
                       <Paper sx={{ p: 3, height: '100%' }}>
-                        <Typography variant="h6" gutterBottom>
-                          Progress Over Time
-                        </Typography>
+                        <Typography variant="h6" gutterBottom>進度趨勢</Typography>
                         <Divider sx={{ mb: 2 }} />
                         {progressData.overview.progress_history ? (
                           <Box sx={{ height: 300 }}>
@@ -355,17 +361,13 @@ const StudentProgress = () => {
                             />
                           </Box>
                         ) : (
-                          <Typography variant="body2" color="text.secondary" align="center">
-                            Not enough data to generate chart
-                          </Typography>
+                          <Typography variant="body2" color="text.secondary" align="center">資料不足，無法生成圖表</Typography>
                         )}
                       </Paper>
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Paper sx={{ p: 3, height: '100%' }}>
-                        <Typography variant="h6" gutterBottom>
-                          Performance by Exercise Type
-                        </Typography>
+                        <Typography variant="h6" gutterBottom>按練習類型表現</Typography>
                         <Divider sx={{ mb: 2 }} />
                         {progressData.overview.performance_by_type ? (
                           <Box sx={{ height: 300 }}>
@@ -384,9 +386,7 @@ const StudentProgress = () => {
                             />
                           </Box>
                         ) : (
-                          <Typography variant="body2" color="text.secondary" align="center">
-                            Not enough data to generate chart
-                          </Typography>
+                          <Typography variant="body2" color="text.secondary" align="center">資料不足，無法生成圖表</Typography>
                         )}
                       </Paper>
                     </Grid>
@@ -400,11 +400,11 @@ const StudentProgress = () => {
                   <Table>
                     <TableHead>
                       <TableRow>
-                        <TableCell>Unit</TableCell>
-                        <TableCell>Lesson</TableCell>
-                        <TableCell align="center">Status</TableCell>
-                        <TableCell align="center">Date Completed</TableCell>
-                        <TableCell align="right">Time Spent (minutes)</TableCell>
+                        <TableCell>單元</TableCell>
+                        <TableCell>課時</TableCell>
+                        <TableCell align="center">狀態</TableCell>
+                        <TableCell align="center">完成日期</TableCell>
+                        <TableCell align="right">花費時間 (分鐘)</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -417,12 +417,12 @@ const StudentProgress = () => {
                               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                 {getStatusIcon(lesson.status)}
                                 <Typography variant="body2" sx={{ ml: 1 }}>
-                                  {lesson.status.replace('_', ' ').charAt(0).toUpperCase() + lesson.status.replace('_', ' ').slice(1)}
-                                </Typography>
+                                {translateStatusOrType(lesson.status)}
+                              </Typography>
                               </Box>
                             </TableCell>
                             <TableCell align="center">
-                              {lesson.completion_date ? new Date(lesson.completion_date).toLocaleDateString() : '-'}
+                              {lesson.completion_date ? new Date(lesson.completion_date).toLocaleDateString() : '無'}
                             </TableCell>
                             <TableCell align="right">
                               {lesson.time_spent || 0}
@@ -432,7 +432,7 @@ const StudentProgress = () => {
                       ) : (
                         <TableRow>
                           <TableCell colSpan={5} align="center">
-                            No lesson progress data available
+                            尚無課時進度資料
                           </TableCell>
                         </TableRow>
                       )}
@@ -447,12 +447,12 @@ const StudentProgress = () => {
                   <Table>
                     <TableHead>
                       <TableRow>
-                        <TableCell>Lesson</TableCell>
-                        <TableCell>Exercise Type</TableCell>
-                        <TableCell align="center">Status</TableCell>
-                        <TableCell align="center">Score</TableCell>
-                        <TableCell align="center">Attempts</TableCell>
-                        <TableCell align="right">Submission Date</TableCell>
+                        <TableCell>課時</TableCell>
+                        <TableCell>練習類型</TableCell>
+                        <TableCell align="center">狀態</TableCell>
+                        <TableCell align="center">得分</TableCell>
+                        <TableCell align="center">嘗試次數</TableCell>
+                        <TableCell align="right">提交日期</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -462,7 +462,7 @@ const StudentProgress = () => {
                             <TableCell>{exercise.lesson_title}</TableCell>
                             <TableCell>
                               <Chip 
-                                label={exercise.type.charAt(0).toUpperCase() + exercise.type.slice(1).replace('_', ' ')}
+                                label={translateStatusOrType(exercise.type)}
                                 size="small"
                                 color={
                                   exercise.type === 'coding' ? 'primary' : 
@@ -475,25 +475,25 @@ const StudentProgress = () => {
                               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                 {getStatusIcon(exercise.status)}
                                 <Typography variant="body2" sx={{ ml: 1 }}>
-                                  {exercise.status.replace('_', ' ').charAt(0).toUpperCase() + exercise.status.replace('_', ' ').slice(1)}
+                                  {translateStatusOrType(exercise.status)}
                                 </Typography>
                               </Box>
                             </TableCell>
                             <TableCell align="center">
-                              {exercise.score !== null ? `${exercise.score}%` : '-'}
+                              {exercise.score !== null ? `${exercise.score}%` : '無'}
                             </TableCell>
                             <TableCell align="center">
                               {exercise.attempts || 0}
                             </TableCell>
                             <TableCell align="right">
-                              {exercise.submission_date ? new Date(exercise.submission_date).toLocaleDateString() : '-'}
+                              {exercise.submission_date ? new Date(exercise.submission_date).toLocaleDateString() : '無'}
                             </TableCell>
                           </TableRow>
                         ))
                       ) : (
                         <TableRow>
                           <TableCell colSpan={6} align="center">
-                            No exercise data available
+                            尚無練習資料
                           </TableCell>
                         </TableRow>
                       )}

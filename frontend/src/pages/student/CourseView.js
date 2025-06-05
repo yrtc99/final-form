@@ -52,7 +52,7 @@ const CourseView = () => {
         const studentId = currentUser?.id;
         if (!studentId) {
           console.error('No student ID available. User might not be logged in properly.');
-          setError('Please login to view course progress.');
+          setError('請登入以查看課程進度。');
           // 仍然可以顯示課程內容，但沒有進度數據
           setProgress({});
         } else {
@@ -93,7 +93,7 @@ const CourseView = () => {
         setCourse(courseResponse.data.course);
         
       } catch (err) {
-        setError('Failed to load course data');
+        setError('載入課程資料失敗');
         console.error(err);
       } finally {
         setLoading(false);
@@ -127,7 +127,7 @@ const CourseView = () => {
   if (!course) {
     return (
       <Container maxWidth="lg" sx={{ mt: 4 }}>
-        <Alert severity="error">Course not found or you don't have access to this course.</Alert>
+        <Alert severity="error">找不到課程或您無權存取此課程。</Alert>
       </Container>
     );
   }
@@ -156,7 +156,7 @@ const CourseView = () => {
         
         <Box sx={{ mb: 2 }}>
           <Typography variant="body2" sx={{ mb: 1 }}>
-            Course Progress: {progressPercentage}% ({completedLessons}/{totalLessons} lessons completed)
+            課程進度：{progressPercentage}% ({completedLessons}/{totalLessons} 課已完成)
           </Typography>
           <LinearProgress 
             variant="determinate" 
@@ -169,7 +169,7 @@ const CourseView = () => {
       {error && <Alert severity="error" sx={{ mb: 3 }}>{error}</Alert>}
       
       <Typography variant="h5" gutterBottom>
-        Course Content
+        課程內容
       </Typography>
       
       {course.units.map((unit) => (
@@ -219,7 +219,7 @@ const CourseView = () => {
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
                           {lessonStatus !== 'not-started' && (
                             <Chip 
-                              label={lessonScore !== null ? `Score: ${lessonScore}%` : 'In Progress'} 
+                              label={lessonScore !== null ? `得分：${lessonScore}%` : '進行中'} 
                               color={lessonStatus === 'completed' ? 'success' : 'warning'}
                               size="small"
                               sx={{ mr: 1 }}

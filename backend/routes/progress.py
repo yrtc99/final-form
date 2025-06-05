@@ -1,5 +1,4 @@
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required, get_jwt_identity
 from backend.models.user import User
 from backend.models.course import Course, Unit, Enrollment
 from backend.models.lesson import Lesson, MultipleChoiceQuestion, FillBlankExercise
@@ -37,10 +36,11 @@ def has_lesson_access(user_id, lesson_id):
 
 # Submit answers to multiple choice questions
 @bp.route('/multiple-choice/<int:lesson_id>', methods=['POST'])
-@jwt_required()
 def submit_multiple_choice_answers(lesson_id):
-    current_user = get_jwt_identity()
-    user_id = current_user['id']
+    data = request.get_json()
+    
+    # 从请求中获取 student_id，如果没有则使用默认值 1
+    user_id = data.get('student_id', 1)
     
     # Only students can submit answers
     user = User.query.get(user_id)
@@ -53,8 +53,6 @@ def submit_multiple_choice_answers(lesson_id):
     lesson = Lesson.query.get(lesson_id)
     if not lesson:
         return jsonify({'error': 'Lesson not found'}), 404
-    
-    data = request.get_json()
     
     if 'answers' not in data or not isinstance(data['answers'], dict):
         return jsonify({'error': 'Invalid answers format'}), 400
@@ -134,10 +132,11 @@ def submit_multiple_choice_answers(lesson_id):
 
 # Submit answers to fill-in-the-blank exercises
 @bp.route('/fill-blank/<int:lesson_id>', methods=['POST'])
-@jwt_required()
 def submit_fill_blank_answers(lesson_id):
-    current_user = get_jwt_identity()
-    user_id = current_user['id']
+    data = request.get_json()
+    
+    # 从请求中获取 student_id，如果没有则使用默认值 1
+    user_id = data.get('student_id', 1)
     
     # Only students can submit answers
     user = User.query.get(user_id)
@@ -150,8 +149,6 @@ def submit_fill_blank_answers(lesson_id):
     lesson = Lesson.query.get(lesson_id)
     if not lesson:
         return jsonify({'error': 'Lesson not found'}), 404
-    
-    data = request.get_json()
     
     if 'answers' not in data or not isinstance(data['answers'], list):
         return jsonify({'error': 'Invalid answers format'}), 400
@@ -272,23 +269,12 @@ def update_completion_status(progress):
 # Get student progress for a course
 @bp.route('/course/<int:course_id>', methods=['GET'])
 def get_course_progress(course_id):
-    user_id = None
-    try:
-        # Try to get user_id from JWT token first
-        current_user = get_jwt_identity()
-        if current_user:
-            user_id = current_user.get('id')
-    except Exception:
-        # JWT might not be present or other issues, proceed to check query param
-        pass
-
-    # If not found via JWT, try to get from query parameter
-    if not user_id:
-        user_id = request.args.get('student_id', type=int)
+    # 从查询参数获取 student_id
+    user_id = request.args.get('student_id', type=int)
     
     # If user_id is still not determined, return an error
     if not user_id:
-        return jsonify({'error': 'Could not determine user ID. Please provide student_id as a query parameter'}), 400
+        return jsonify({'error': 'Please provide student_id as a query parameter'}), 400
     
     # Check if user exists
     user = User.query.get(user_id)
