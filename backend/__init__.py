@@ -3,12 +3,12 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
-from flask_jwt_extended import JWTManager
+# from flask_jwt_extended import JWTManager # JWT Removed
 
 # Initialize extensions
 db = SQLAlchemy()
 migrate = Migrate()
-jwt = JWTManager()
+# jwt = JWTManager() # JWT Removed
 
 def create_app(test_config=None):
     # Create and configure the app
@@ -30,14 +30,14 @@ def create_app(test_config=None):
     # Configure database
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///python_learning.db')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY', 'dev-secret-key')
+    # app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY', 'dev-secret-key') # JWT Removed
     
     # Initialize extensions with app
     db.init_app(app)
     migrate.init_app(app, db)
     # 配置 CORS 以接受任何源的請求
     CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
-    jwt.init_app(app)
+    # jwt.init_app(app) # JWT Removed
 
     # Register blueprints
     from routes import auth, courses, lessons, progress, users, code_execution, lesson_content, lesson_content_fillblank, student

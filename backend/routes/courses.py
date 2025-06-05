@@ -1,5 +1,4 @@
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required, get_jwt_identity
 from backend.models.user import User
 from backend.models.course import Course, Unit, Enrollment
 from backend.models.lesson import Lesson
@@ -7,11 +6,6 @@ from backend.models.progress import Progress
 from backend import db
 
 bp = Blueprint('courses', __name__, url_prefix='/api/courses')
-
-# Helper function to check if user is a teacher
-def is_teacher(user_id):
-    user = User.query.get(user_id)
-    return user and user.is_teacher()
 
 # Helper function to check if user is enrolled in a course
 def is_enrolled(student_id, course_id):
@@ -27,14 +21,11 @@ def create_course():
     if 'title' not in data:
         return jsonify({'error': 'Course title is required'}), 400
     
-    # 如果提供了creator_id使用它，否則默認為1（假設是管理員ID）
-    creator_id = data.get('creator_id', 1)
-    
     # Create new course
     course = Course(
         title=data['title'],
         description=data.get('description', ''),
-        creator_id=creator_id
+        creator_id=data.get('creator_id', 1)
     )
     
     db.session.add(course)
@@ -72,23 +63,12 @@ def get_course(course_id):
     
     return jsonify({'course': course_data}), 200
 
-# Update a course (teacher only)
+# Update a course
 @bp.route('/<int:course_id>', methods=['PUT'])
-@jwt_required()
 def update_course(course_id):
-    current_user = get_jwt_identity()
-    user_id = current_user['id']
-    
-    if not is_teacher(user_id):
-        return jsonify({'error': 'Only teachers can update courses'}), 403
-    
     course = Course.query.get(course_id)
     if not course:
         return jsonify({'error': 'Course not found'}), 404
-    
-    # Check if the user is the creator of the course
-    if course.creator_id != user_id:
-        return jsonify({'error': 'You do not have permission to update this course'}), 403
     
     data = request.get_json()
     
@@ -102,23 +82,12 @@ def update_course(course_id):
     
     return jsonify({'message': 'Course updated successfully', 'course': course.to_dict()}), 200
 
-# Delete a course (teacher only)
+# Delete a course
 @bp.route('/<int:course_id>', methods=['DELETE'])
-@jwt_required()
 def delete_course(course_id):
-    current_user = get_jwt_identity()
-    user_id = current_user['id']
-    
-    if not is_teacher(user_id):
-        return jsonify({'error': 'Only teachers can delete courses'}), 403
-    
     course = Course.query.get(course_id)
     if not course:
         return jsonify({'error': 'Course not found'}), 404
-    
-    # Check if the user is the creator of the course
-    if course.creator_id != user_id:
-        return jsonify({'error': 'You do not have permission to delete this course'}), 403
     
     db.session.delete(course)
     db.session.commit()
@@ -204,6 +173,44 @@ def enroll_students(course_id):
     db.session.commit()
     
     return jsonify({'message': 'Enrollment process completed', 'results': results}), 200
+
+# Update all enrollments for a course (replaces existing enrollments)
+@bp.route('/<int:course_id>/enrollments', methods=['PUT'])
+def update_course_enrollments(course_id):
+    course = Course.query.get(course_id)
+    if not course:
+        return jsonify({'error': '找不到該課程'}), 404
+
+    data = request.get_json()
+    student_ids = data.get('student_ids')
+
+    if student_ids is None or not isinstance(student_ids, list):
+        return jsonify({'error': '必須提供學生ID列表'}), 400
+
+    try:
+        # 1. Remove all existing enrollments for this course
+        Enrollment.query.filter_by(course_id=course_id).delete()
+        
+        # 2. Add new enrollments for the provided student_ids
+        new_enrollments = []
+        for student_id in student_ids:
+            student = User.query.get(student_id)
+            if student and student.role == 'student':
+                enrollment = Enrollment(student_id=student_id, course_id=course_id)
+                new_enrollments.append(enrollment)
+            else:
+                # Optionally, log or raise an error for invalid student_ids
+                print(f"警告：學生ID {student_id} 不存在或非學生角色，已跳過註冊。")
+        
+        if new_enrollments:
+            db.session.add_all(new_enrollments)
+        
+        db.session.commit()
+        return jsonify({'message': '課程註冊狀態已成功更新'}), 200
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error updating enrollments: {e}")
+        return jsonify({'error': '更新課程註冊狀態時發生錯誤'}), 500
 
 # Get students enrolled in a course
 @bp.route('/<int:course_id>/enrollments', methods=['GET'])
@@ -314,28 +321,13 @@ def update_unit_direct(unit_id):
 
 # 獲取學生已註冊的所有課程
 @bp.route('/enrolled', methods=['GET'])
+# @jwt_required() # JWT Removed
 def get_enrolled_courses():
-    student_id = None
-    try:
-        # Try to get student_id from JWT token first
-        current_user = get_jwt_identity()
-        if current_user:
-            student_id = current_user.get('id')
-    except Exception:
-        # JWT might not be present or other issues, proceed to check query param
-        pass
+    # student_id = get_jwt_identity() # JWT Removed. This endpoint now needs student_id from query params.
+    student_id = request.args.get('student_id', type=int)
+    if not student_id:
+        return jsonify({'error': 'student_id query parameter is required'}), 400
 
-    # If not found via JWT, try to get from query parameter
-    if not student_id:
-        student_id = request.args.get('student_id', type=int)
-    
-    # If student_id is still not determined, return empty list or error
-    if not student_id:
-        # Option 1: Return empty list if no student context
-        return jsonify([]), 200 
-        # Option 2: Return an error (more explicit)
-        # return jsonify({'error': 'Could not determine student ID'}), 400
-    
     # 獲取該學生所有的註冊記錄
     enrollments = Enrollment.query.filter_by(student_id=student_id).all()
     

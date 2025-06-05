@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+# from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+# JWT functionality removed
 from backend.models.user import User
 from backend import db
 import datetime
@@ -63,26 +64,23 @@ def login():
     if not user or not user.check_password(data['password']):
         return jsonify({'error': 'Invalid username or password'}), 401
     
-    # Create access token with user identity and role
-    access_token = create_access_token(
-        identity={
-            'id': user.id,
-            'username': user.username,
-            'role': user.role
-        },
-        expires_delta=datetime.timedelta(days=1)
-    )
-    
+    # JWT Removed. Login now only validates credentials.
+    # No token is returned.
     return jsonify({
-        'access_token': access_token,
+        'message': 'Login successful',
         'user': user.to_dict()
     }), 200
 
 
 @bp.route('/profile', methods=['GET'])
-@jwt_required()
+# @jwt_required() # JWT Removed
 def profile():
-    current_user_id = get_jwt_identity()['id']
+    # current_user_id = get_jwt_identity() # JWT Removed. This needs user_id from path or query.
+    # For now, this endpoint will not function as intended without JWT.
+    user_id = request.args.get('user_id') # Example: pass user_id as query param
+    if not user_id:
+        return jsonify({'error': 'User ID required for profile'}), 400
+    current_user_id = int(user_id)
     user = User.query.get(current_user_id)
     
     if not user:
@@ -92,9 +90,15 @@ def profile():
 
 
 @bp.route('/change-password', methods=['PUT'])
-@jwt_required()
+# @jwt_required() # JWT Removed
 def change_password():
-    current_user_id = get_jwt_identity()['id']
+    # current_user_id = get_jwt_identity() # JWT Removed. This needs user_id from path or query.
+    # For now, this endpoint will not function as intended without JWT.
+    data = request.get_json()
+    user_id = data.get('user_id') # Example: expect user_id in payload
+    if not user_id:
+        return jsonify({'error': 'User ID required to change password'}), 400
+    current_user_id = int(user_id)
     user = User.query.get(current_user_id)
     
     if not user:
