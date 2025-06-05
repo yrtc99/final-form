@@ -1,0 +1,40 @@
+{
+  "id": "dataProcessingNai",
+  "title": "資料處理與踏入AI",
+  "description": "掌握高級神經網絡架構和訓練技巧。",
+  "image": "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&q=80&w=1000",
+  "lessons": [
+    {
+      "tutorial": [],
+      "id": "cnn",
+      "title": "卷積神經網絡",
+      "description": "學習構建和訓練用於圖像處理的 CNN",
+      "type": "tutorial",
+      "quiz": {
+        "type": "quiz",
+        "questions": [
+          {
+            "id": "q1",
+            "question": "卷積層的主要目的是什麼？",
+            "options": [
+              "提取圖像特徵",
+              "減少圖像大小",
+              "增加圖像顏色",
+              "改變圖像格式"
+            ],
+            "correctAnswer": 0,
+            "explanation": "卷積層的主要目的是從輸入數據中提取特徵，在圖像處理中特別有用。"
+          }
+        ]
+      },
+      "experience": 200,
+      "skills": [
+        {
+          "name": "CNN",
+          "points": 100
+        }
+      ]
+    }
+  ],
+  "__collections__": {}
+}

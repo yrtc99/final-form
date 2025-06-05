@@ -1,0 +1,175 @@
+{
+  "description": "我們將學習「條件判斷（Conditional Statements）」的基本概念。我們可以讓程式具備「思考能力」，根據使用者的輸入、資料的狀態或邏輯條件，做出相應的反應。",
+  "image": "https://plus.unsplash.com/premium_vector-1682308657905-c3da477473a3?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "lessons": [
+    {
+      "id": "cnn",
+      "skills": [
+        {
+          "points": 100,
+          "name": "CNN"
+        }
+      ],
+      "description": "學習構建和訓練用於圖像處理的 CNN",
+      "type": "tutorial",
+      "quiz": {
+        "questions": [
+          {
+            "correctAnswer": 0,
+            "options": [
+              "提取圖像特徵",
+              "減少圖像大小",
+              "增加圖像顏色",
+              "改變圖像格式"
+            ],
+            "question": "卷積層的主要目的是什麼？",
+            "id": "q1",
+            "explanation": "卷積層的主要目的是從輸入數據中提取特徵，在圖像處理中特別有用。"
+          }
+        ],
+        "type": "quiz"
+      },
+      "tutorial": [],
+      "title": "卷積神經網絡",
+      "experience": 200
+    },
+    {
+      "description": "在現實生活中，我們經常會根據不同的情況做出不同的決定。",
+      "pythonExercise": {
+        "title": "請同學依提示使用 `else` 處理 `if`完成程式",
+        "id": "condition1",
+        "description": ""
+      },
+      "skills": [
+        {
+          "name": "New Skill",
+          "points": 50
+        }
+      ],
+      "type": "python-exercise",
+      "content": "\n# 📘 條件判斷的基本概念\n\n題目總數：10 題\n\n---\n## 1. 溫度判斷\n\n**題目描述：** 輸入一個整數溫度 `t`，如果 `t >= 30`，印出「熱」；否則印出「不熱」。\n\n**程式提示：**\n\n```python\n# 讀取使用者輸入並轉成整數\nt = int(input(\"請輸入溫度：\"))\n# 判斷是否熱\nif :\n    print(\"熱\")\nelse:\n    print(\"不熱\")\n```\n\n\n---\n\n## 2. 森林邏輯的錯誤魔咒\n\n閱讀一段判斷奇偶的程式碼，找出並修正輸出錯誤，使其能正確輸出「偶數」或「奇數」。\n\n```python\n# 題目：森林邏輯的錯誤魔咒\n# 閱讀一段判斷奇偶的程式碼，找出並修正輸出錯誤，使其能正確輸出「偶數」或「奇數」。\nnum = int(input(\"請輸入一個整數：\"))\nif :\n    # TODO: 印出「偶數」\nelse:\n    # TODO: 印出「奇數」\n```\n\n---\n\n## 3. 勇者的及格考驗\n\n輸入 0–100 之間的成績，判斷並輸出「通過」（≥60）或「再努力」（<60）。\n\n```python\n# 題目：勇者的及格考驗\n# 輸入 0–100 之間的成績，判斷並輸出「通過」（≥60）或「再努力」（<60）。\nscore = int(input(\"請輸入成績（0-100）：\"))\n# TODO: 如果 score >= 60，印出「通過」\n# 否則印出「再努力」\n```\n\n---\n\n## 4. 龍與山峰的高度比較\n\n輸入兩個數字，輸出其中較大的值並附上提示文字。\n\n```python\n# 題目：龍與山峰的高度比較\n# 輸入兩個數字，輸出其中較大的值並附上提示文字。\na, b = map(int, input(\"請輸入兩座山峰高度，用空格分隔：\").split())\n# TODO: 如果 a > b，印出「山峰 A 更高」及 a\n# 否則印出「山峰 B 更高」及 b\n```\n\n---\n\n## 5. 三道魔法門的密碼\n\n輸入三個數字，找出並輸出最大的那個數字。\n\n```python\n# 題目：三道魔法門的密碼\n# 輸入三個數字，找出並輸出最大的那個數字。\nx, y, z = map(int, input(\"請輸入三道門號碼，用空格分隔：\").split())\n# TODO: 使用 if/elif 比較 x, y, z 找出最大值並印出\n```\n\n---\n\n## 6. 水晶母音的守護\n\n撰寫函式 `is_vowel(ch)`，判斷傳入字母是否為母音 (a, e, i, o, u)，並回傳 `True`/`False`。\n\n```python\n# 題目：水晶母音的守護\n# 撰寫函式 is_vowel(ch)，判斷傳入字母是否為母音 (a, e, i, o, u)，並回傳 True/False。\ndef is_vowel(ch):\n    # TODO: 回傳 ch.lower() 是否在 ['a','e','i','o','u'] 中\n    pass\n\n# 測試函式，讀取字母並印出結果\nprint(is_vowel(input(\"請輸入一個英文字母：\")))\n```\n\n---\n\n## 7. 成年騎士的資格\n\n撰寫函式 `is_adult(age)`，判斷年齡是否 ≥18，並在程式中輸出對應訊息。\n\n```python\n# 題目：成年騎士的資格\n# 撰寫函式 is_adult(age)，判斷年齡是否 ≥18，並在程式中輸出對應訊息。\ndef is_adult(age):\n    # TODO: 回傳 age >= 18\n    pass\n\nage = int(input(\"請輸入年齡：\"))\n# TODO: 呼叫 is_adult，並用 if/else 印出對應訊息\n```\n\n---\n\n## 8. 四季之書的章節索引\n\n利用字典將月份 (1–12) 映射到季節，輸入月份後輸出對應季節；若非 1–12，輸出「未知章節」。\n\n```python\n# 題目：四季之書的章節索引\n# 利用字典將月份 (1–12) 映射到季節，輸入月份後輸出對應季節；若非 1–12，輸出「未知章節」。\nmonth_season = {\n    1:'冬季', 2:'冬季', 3:'春季', 4:'春季',\n    5:'夏季', 6:'夏季', 7:'夏季', 8:'秋季',\n    9:'秋季',10:'秋季',11:'冬季',12:'冬季'\n}\nmonth = int(input(\"請輸入月份：\"))\n# TODO: 使用 dict.get(month, \"未知章節\") 並印出結果\n```\n\n---\n\n## 9. 猜季節大冒險\n\n隨機選擇 1–12 月份，讓使用者猜季節，輸入後判斷並輸出「猜對了！」或「再試一次」。\n\n```python\n# 題目：猜季節大冒險\n# 隨機選擇 1–12 月份，讓使用者猜季節，輸入後判斷並輸出「猜對了！」或「再試一次」。\nimport random\nmonth = random.randint(1,12)\nguess = input(\"請猜這個月份的季節：\")\n# TODO: 比對 guess 與 month_season[month]\n```\n\n---\n\n## 10. 守護者的密碼試煉\n\n預設密碼為 \"python123\"，讓使用者最多嘗試三次，正確則輸出「城門開啟」，否則「三次失敗，請稍後再試」。\n\n```python\n# 題目：守護者的密碼試煉\n# 預設密碼為 \"python123\"，讓使用者最多嘗試三次，正確則輸出「城門開啟」，否則「三次失敗，請稍後再試」。\npassword = \"python123\"\nfor i in range(3):\n    entry = input(f\"第{i+1}次嘗試，輸入密碼：\")\n    # TODO: 如果 entry == password，印出成功訊息並 break\nelse:\n    # TODO: 如果三次皆失敗，印出失敗訊息\n```\n",
+      "id": "condition-l1",
+      "tutorial": [],
+      "title": "條件判斷的基本概念",
+      "experience": 100
+    },
+    {
+      "content": "## 1. 數字精靈的挑戰\n\n輸入一個整數後，判斷並輸出「正數」、「負數」或「零」。\n\n```python\n# 題目：數字精靈的挑戰\n# 輸入一個整數後，判斷並輸出「正數」、「負數」或「零」。\n# 讀取使用者輸入並轉成整數\nnum = int(input(\"請輸入一個整數：\"))\n# 判斷正負或零\nif :\n    # TODO: 印出「正數」\nelif :\n    # TODO: 印出「零」\nelse:\n    # TODO: 印出「負數」\n```\n\n---\n\n## 2. 數字檢查\n\n**題目描述：** 輸入一個整數 `n`，如果 `n > 0` 印「正數」；如果 `n == 0` 印「零」；否則印「負數」。\n\n\n\n\n---\n\n## 3. 分數等級\n\n**題目描述：** 輸入成績 `score`（0–100），印出：\n\n* ≥90 →「優秀」\n* 60–89 →「良好」\n* <60 →「待加強」\n\n\n\n\n---\n\n## 4. 多選題自動判分\n\n**題目描述：** 輸入答對題數 `correct`（0–5），如果 `correct == 5` 印「全對」；`correct >= 3` 印「過關」；否則印「不及格」。\n\n\n\n\n\n---\n\n## 5. 年齡分組\n\n**題目描述：** 輸入年齡 `age`，如果 `< 13` 印「兒童」；`13–18` 印「青少年」；`> 18` 印「成人」。\n\n\n\n\n---\n\n## 6. 字母辨識\n\n**題目描述：** 輸入一個英文字母 `ch`，如果是母音 (`a,e,i,o,u`) 印「母音」；否則印「子音」。\n\n\n\n---\n\n## 7. 購物折扣\n\n**題目描述：** 輸入購買數量 `qty`，如果 `qty > 10` 印「打 8 折」；`5–10` 印「打 9 折」；`< 5` 印「無折扣」。\n\n\n---\n\n## 8. 季節判斷\n\n**題目描述：** 輸入月份 `m`（1–12）：\n\n* 3–5 →「春季」\n* 6–8 →「夏季」\n* 9–11 →「秋季」\n* 其餘 →「冬季」\n\n\n\n---\n\n## 9. 數字範圍檢查\n\n**題目描述：** 輸入整數 `x`，如果 `1–10` 印「範圍內」；否則印「範圍外」。\n\n\n\n\n---\n\n## 10. 密碼檢驗\n\n**題目描述：** 預設密碼為 `\"abc123\"`，輸入嘗試密碼 `p`，如果相同印「登入成功」；否則印「密碼錯誤」。\n\n\n",
+      "experience": 100,
+      "description": "1. 使用 `else` 處理 `if` 條件不成立時的情況。\n2. 使用 `elif` 處理多重條件判斷，提高程式可讀性。",
+      "type": "python-exercise",
+      "pythonExercise": {
+        "title": "請同學依提示使用else 和 elif 完成程式",
+        "id": "condition2"
+      },
+      "id": "condition-l2",
+      "skills": [
+        {
+          "points": 50,
+          "name": "New Skill"
+        }
+      ],
+      "tutorial": [],
+      "title": "else 和 elif 的應用 "
+    },
+    {
+      "skills": [
+        {
+          "points": 50,
+          "name": "New Skill"
+        }
+      ],
+      "tutorial": [],
+      "experience": 100,
+      "description": "1. 了解邏輯運算子 `and`、`or`、`not` 的基本用法。\n2. 學會撰寫巢狀條件判斷結構（`if` 內再使用 `if`）。",
+      "pythonExercise": {
+        "title": "使用巣狀條件判斷結合and, or, not完成題目",
+        "id": "condition3"
+      },
+      "type": "python-exercise",
+      "id": "condition-l3",
+      "title": "邏輯運算與複雜條件判斷",
+      "content": "1. **同時通過考試**\n\n* **題目描述：** 輸入數學與英文成績，只有當兩科都 ≥ 60 才印「通過」，否則印「不通過」。\n* **提示程式骨架：**\n\n  ```python\n  math_score = int(input(\"請輸入數學成績：\"))\n  eng_score  = int(input(\"請輸入英文成績：\"))\n  # TODO: 若 math_score >= 60 and eng_score >= 60，印通過，否則印不通過\n  ```\n\n2. **購物安全檢查**\n\n* **題目描述：** 輸入年齡與是否有身分證（輸入 Y/N），只有當年齡 ≥18 且有身分證時才印「允許購買」，否則印「拒絕購買」。\n* **提示程式骨架：**\n\n  ```python\n  age    = int(input(\"請輸入年齡：\"))\n  has_id = input(\"是否有身分證 (Y/N)：\").upper()\n  # TODO: 若 age >= 18 and has_id == 'Y'，印允許購買，否則印拒絕購買\n  ```\n\n3. **會員折扣**\n\n* **題目描述：** 輸入會員等級與是否首次購物（Y/N），若等級為 Gold 或 Platinum 且不是首次購物，印「折扣 20%」，否則印「無折扣」。\n* **提示程式骨架：**\n\n  ```python\n  level      = input(\"請輸入會員等級：\")\n  first_time = input(\"是否首次購物 (Y/N)：\").upper()\n  # TODO: 若 (level == 'Gold' or level == 'Platinum') and first_time != 'Y'\n  ```\n\n4. **水果重量分級**\n\n* **題目描述：** 輸入水果重量（公斤），當重量 >5 印「大果」；2 < 重量 <=5 印「中果」；否則印「小果」。\n* **提示程式骨架：**\n\n  ```python\n  w = float(input(\"請輸入水果重量 (kg)：\"))\n  # TODO: if w > 5, else: if w > 2\n  ```\n\n5. **登山裝備檢查**\n\n* **題目描述：** 輸入是否有水（Y/N）及是否有食物（Y/N），若兩者皆無，印「危險」，否則印「安全」。\n* **提示程式骨架：**\n\n  ```python\n  has_water = input(\"是否有水 (Y/N)：\").upper()\n  has_food  = input(\"是否有食物 (Y/N)：\").upper()\n  # TODO: 若 not (has_water == 'Y' or has_food == 'Y')\n  ```\n\n6. **雙重驗證流程**\n\n* **題目描述：** 輸入密碼與一次性密碼（OTP），若密碼正確且 OTP 正確，印「登入成功」，否則印「登入失敗」。\n* **提示程式骨架：**\n\n  ```python\n  password = input(\"請輸入密碼：\")\n  otp      = input(\"請輸入 OTP：\")\n  # TODO: if password == 'pass123' and otp == '0000'\n  ```\n\n7. **數字奇偶與大小**\n\n* **題目描述：** 輸入一個整數，若為偶數且大於 10，印「大偶數」，否則印「其他情況」。\n* **提示程式骨架：**\n\n  ```python\n  n = int(input(\"請輸入整數：\"))\n  # TODO: if n % 2 == 0 and n > 10\n  ```\n\n8. **分數結果複合判斷**\n\n* **題目描述：** 輸入成績，若 ≥90 印「優等」；60 ≤ 成績 < 90 印「及格」；否則印「不及格」。\n* **提示程式骨架：**\n\n  ```python\n  s = int(input(\"請輸入成績：\"))\n  # TODO: if s >= 90, elif s >= 60, else\n  ```\n\n9. **安全出行建議**\n\n* **題目描述：** 輸入是否下雨（Y/N）及氣溫，若下雨或氣溫 < 10，印「攜帶雨具且保暖」，否則印「輕裝出行」。\n* **提示程式骨架：**\n\n  ```python\n  is_raining = input(\"是否下雨 (Y/N)：\").upper()\n  t          = int(input(\"請輸入氣溫：\"))\n  # TODO: if is_raining == 'Y' or t < 10\n  ```\n\n10. **複合資格檢查**\n\n* **題目描述：** 輸入年齡、是否有駕照（Y/N）及測驗分數，若年齡 ≥18 且有駕照且分數 ≥80，印「可執照練習」，否則印「條件不符」。\n* **提示程式骨架：**\n\n  ```python\n  age         = int(input(\"請輸入年齡：\"))\n  has_license = input(\"是否有駕照 (Y/N)：\").upper()\n  score       = int(input(\"請輸入測驗分數：\"))\n  # TODO: if age >= 18 and has_license == 'Y' and score >= 80\n  ```"
+    },
+    {
+      "pythonExercise": {
+        "id": "condition4",
+        "title": "生活中的問題可以利用所學的技術解決喔~"
+      },
+      "content": "1. **健康水量檢查**\n   **題目描述：** 讀取使用者輸入的每日飲水量（毫升），若飲水量 < 1500，印出「喝水不足」，1500–3000 印「水量適中」，>3000 印「喝太多水」。\n   **程式提示：**\n\n   ```python\n   water_ml = int(input(\"請輸入今日飲水量 (毫升)：\"))\n   # TODO: if/elif/else 判斷並印出相應提示\n   ```\n\n2. **購物金額免費運費**\n   **題目描述：** 讀取購物車總金額，若金額 ≥ 1000，免運費；500–999 運費 50；<500 運費 100，最後印出「運費：X 元」。\n   **程式提示：**\n\n   ```python\n   total = float(input(\"請輸入購物金額：\"))\n   # TODO: 判斷運費後印出，如 print(f\"運費：{fee} 元\")\n   ```\n\n3. **點餐甜度調整**\n   **題目描述：** 讀取飲料甜度級別（輸入 S、M、L 分別代表少糖、中糖、全糖），印出「甜度：少糖」、「甜度：中糖」或「甜度：全糖」。\n   **程式提示：**\n\n   ```python\n   level = input(\"請輸入甜度 (S/M/L)：\").upper()\n   # TODO: if level == 'S' ... elif level == 'M' ... else\n   ```\n\n4. **電影分級建議**\n   **題目描述：** 讀取觀影者年齡：\n\n   * < 12 → 建議觀看「兒童」分級。\n   * 12–17 → 建議「輔導級」。\n   * ≥18 → 建議「限制級」。\n     **程式提示：**\n\n   ```python\n   age = int(input(\"請輸入年齡：\"))\n   # TODO: 使用 if/elif/else 印出建議分級\n   ```\n\n5. **季節穿搭建議**\n   **題目描述：** 讀取當前溫度（整數攝氏度）：\n\n   * ≤0 → 「穿厚大衣」\n   * 1–15 → 「穿外套」\n   * 16–25 → 「穿長袖」\n   * > 25 → 「穿短袖」\n     > **程式提示：**\n\n   ```python\n   temp = int(input(\"請輸入目前氣溫 (°C)：\"))\n   # TODO: 多重條件判斷後印出建議\n   ```\n\n6. **路燈開關控制**\n   **題目描述：** 讀取光線強度（數值 0–100）：若 <20 且時間晚於 18（18–23），則印「開燈」，否則印「關燈」。\n   **程式提示：**\n\n   ```python\n   light = int(input(\"請輸入光線強度 (0-100)：\"))\n   hour  = int(input(\"請輸入當前小時 (0-23)：\"))\n   # TODO: if light < 20 and hour >=18\n   ```\n\n7. **班級及格率判斷**\n   **題目描述：** 讀取及格人數與總人數，計算及格率 = 及格人數/總人數，若及格率 ≥0.8，印「表現優異」；0.6–0.79 印「尚可」；<0.6 印「需加強」。\n   **程式提示：**\n\n   ```python\n   passed = int(input(\"輸入及格人數：\"))\n   total  = int(input(\"輸入總人數：\"))\n   rate = passed / total\n   # TODO: if rate >= 0.8, elif rate >= 0.6, else\n   ```\n\n8. **交通號誌模擬**\n   **題目描述：** 讀取號誌顏色（Green/Yellow/Red）：\n\n   * Green → 「可以通行」\n   * Yellow → 「請減速」\n   * Red → 「停車」\n     **程式提示：**\n\n   ```python\n   signal = input(\"請輸入號誌顏色：\").capitalize()\n   # TODO: if/elif/else 判斷並印出對應文字\n   ```\n\n9. **社群互動回應**\n   **題目描述：** 讀取使用者留言情緒（Happy/Sad/Angry）：回應「太棒了！」、「抱抱」或「冷靜一下」。\n   **程式提示：**\n\n   ```python\n   mood = input(\"請輸入心情 (Happy/Sad/Angry)：\").capitalize()\n   # TODO: 依 mood 印出不同回應\n   ```\n\n10. **銀行提款手續費**\n    **題目描述：** 讀取提款金額：\n\n    * ≤1000 → 手續費 10 元\n    * 1001–5000 → 手續費 20 元\n    * > 5000 → 手續費 30 元\n      > 最後印出「手續費：X 元」。\n      > **程式提示：**\n\n    ```python\n    amount = int(input(\"請輸入提款金額：\"))\n    # TODO: if/elif/else 計算 fee 並印出\n    ```",
+      "type": "python-exercise",
+      "tutorial": [],
+      "id": "condition-l4",
+      "description": "學會撰寫完整的條件判斷程式碼，將條件判斷應用於真實生活情境。",
+      "skills": [
+        {
+          "points": 50,
+          "name": "New Skill"
+        }
+      ],
+      "title": "條件判斷的綜合應用",
+      "experience": 100
+    },
+    {
+      "pythonExercise": {
+        "id": "condition-l1-and-l2-homework-exercise",
+        "title": "菜就多練!"
+      },
+      "description": "針對「條件判斷的基本概念」課程的進階練習",
+      "tutorial": [],
+      "type": "python-exercise",
+      "content": "## 1. 魔法成績評鑑\n\n**題目描述**：輸入 0–100 分成績，依規則輸出等級：\n\n* ≥90 → A\n* 80–89 → B\n* 70–79 → C\n* 60–69 → D\n* 其他 → E\n\n**程式提示**：\n\n```python\nscore = int(input(\"請輸入成績：\"))\n# TODO: 使用 if/elif 判斷分數區間並印出對應等級\n```\n\n**參考答案**：\n\n```python\nscore = int(input())\nif score >= 90:\n    print(\"A\")\nelif score >= 80:\n    print(\"B\")\nelif score >= 70:\n    print(\"C\")\nelif score >= 60:\n    print(\"D\")\nelse:\n    print(\"E\")\n```\n\n---\n\n## 2. 閏年密令\n\n**題目描述**：輸入年份，判斷是否為閏年。閏年條件：能被 4 整除且不能被 100 整除，或能被 400 整除。\n\n**程式提示**：\n\n```python\nyear = int(input(\"請輸入年份：\"))\n# TODO: if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)\n```\n\n**參考答案**：\n\n```python\nyear = int(input())\nif (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):\n    print(\"閏年\")\nelse:\n    print(\"平年\")\n```\n\n---\n\n## 3. 健康之湯的 BMI 分析\n\n**題目描述**：輸入身高（公尺）與體重（公斤），計算 BMI = 體重 / (身高\\*\\*2)，並依 BMI 分類：\n\n* <18.5 → 過輕\n* 18.5–24 → 正常\n* 24–27 → 過重\n* ≥27 → 肥胖\n\n**程式提示**：\n\n```python\nheight = float(input(\"輸入身高 (m)：\"))\nweight = float(input(\"輸入體重 (kg)：\"))\nbmi = weight / (height ** 2)\n# TODO: 使用 if/elif 判斷 bmi 並印出分類\n```\n\n**參考答案**：\n\n```python\nheight = float(input())\nweight = float(input())\nbmi = weight / (height ** 2)\nif bmi < 18.5:\n    print(\"過輕\")\nelif bmi < 24:\n    print(\"正常\")\nelif bmi < 27:\n    print(\"過重\")\nelse:\n    print(\"肥胖\")\n```\n\n---\n\n## 4. 水果攤大折扣\n\n**題目描述**：輸入購買數量與單價，若數量>100 給 1 折（0.1）；51–100 給 9 折（0.9）；1–50 無折扣，輸出總價。\n\n**程式提示**：\n\n```python\nqty = int(input(\"輸入數量：\"))\nprice = float(input(\"輸入單價：\"))\n# TODO: 決定折扣率 discount，計算 qty * price * discount\n```\n\n**參考答案**：\n\n```python\nqty = int(input())\nprice = float(input())\nif qty > 100:\n    discount = 0.1\nelif qty >= 51:\n    discount = 0.9\nelse:\n    discount = 1.0\nprint(qty * price * discount)\n```\n\n---\n\n## 5. FizzBuzz 試煉\n\n**題目描述**：輸入一正整數 n，若能被 3 整除印 \"Fizz\"，能被 5 整除印 \"Buzz\"，兩者皆能則 \"FizzBuzz\"，否則印數字。\n\n**程式提示**：\n\n```python\nn = int(input(\"輸入正整數：\"))\n# TODO: 先建立結果字串，檢查 n%3 和 n%5\n```\n\n**參考答案**：\n\n```python\nn = int(input())\nresult = \"\"\nif n % 3 == 0:\n    result += \"Fizz\"\nif n % 5 == 0:\n    result += \"Buzz\"\nprint(result or n)\n```\n\n---\n\n## 6. 神秘字串的守護\n\n**題目描述**：輸入一段文字，判斷是否以大寫字母開頭且長度 > 5，印 True/False。\n\n**程式提示**：\n\n```python\ns = input(\"輸入文字：\")\n# TODO: 判斷 s[0].isupper() 和 len(s) > 5\n```\n\n**參考答案**：\n\n```python\ns = input()\nprint(s[0].isupper() and len(s) > 5)\n```\n\n---\n\n## 7. 月之精靈的天數詛咒\n\n**題目描述**：輸入年份與月份，輸出該月天數（1,3,5,7,8,10,12 → 31 天；4,6,9,11 → 30 天；2 月依閏年 28/29 天）。\n\n**程式提示**：\n\n```python\nyear = int(input(\"輸入年份：\"))\nmonth = int(input(\"輸入月份：\"))\n# TODO: if month in [...] 或 month == 2\n```\n\n**參考答案**：\n\n```python\nyear = int(input())\nmonth = int(input())\nif month in [1,3,5,7,8,10,12]:\n    print(31)\nelif month in [4,6,9,11]:\n    print(30)\nelse:\n    if (year%4==0 and year%100!=0) or (year%400==0):\n        print(29)\n    else:\n        print(28)\n```\n\n---\n\n## 8. 偶數偵查隊\n\n**題目描述**：輸入三個整數，判斷是否至少有一個是偶數，印 \"Yes\"/\"No\"。\n\n**程式提示**：\n\n```python\na,b,c = map(int, input(\"輸入三個整數：\").split())\n# TODO: 使用 or 檢查 a%2==0, b%2==0, c%2==0\n```\n\n**參考答案**：\n\n```python\na,b,c = map(int, input().split())\nif a%2==0 or b%2==0 or c%2==0:\n    print(\"Yes\")\nelse:\n    print(\"No\")\n```\n\n---\n\n## 9. 質數守衛的挑戰\n\n**題目描述**：輸入一個正整數，判斷是否為質數（只能被 1 和自己整除），印 True/False。\n\n**程式提示**：\n\n```python\nn = int(input(\"輸入正整數：\"))\n# TODO: 用 for 迴圈檢查除數範圍 2..n-1\n```\n\n**參考答案**：\n\n```python\nn = int(input())\nis_prime = True\nfor i in range(2, n):\n    if n % i == 0:\n        is_prime = False\n        break\nprint(is_prime)\n```\n\n---\n\n## 10. 密碼強度之鑰\n\n**題目描述**：輸入密碼，判斷長度 ≥8 且包含英文字母和數字，符合則印 \"強\"，否則 \"弱\"。\n\n**程式提示**：\n\n```python\npwd = input(\"輸入密碼：\")\n# TODO: any(c.isdigit()) and any(c.isalpha()) and len>=8\n```",
+      "experience": 100,
+      "id": "condition-l1-and-l2-homework",
+      "title": "條件判斷的基本概念 -進階練習題",
+      "skills": [
+        {
+          "name": "New Skill",
+          "points": 50
+        }
+      ]
+    },
+    {
+      "id": "condition-l3-homework",
+      "experience": 100,
+      "type": "python-exercise",
+      "content": "## 題目 1：會員購物金回饋\n\n輸入購物金額金額 `amount` 與會員等級 `level`（Gold/Silver/None）：\n\n* Gold 會員且金額 ≥ 500 → 回饋 10%\n* Silver 會員且金額 ≥ 300 → 回饋 5%\n* 其他 → 無回饋\n\n**程式提示：**\n\n```python\namount = float(input(\"請輸入購物金額：\"))\nlevel  = input(\"請輸入會員等級 (Gold/Silver/None)：\")\n# TODO: 使用 and/or/elif 判斷積分回饋比例\n```\n\n---\n\n## 題目 2：複合三角形分類\n\n輸入三角形三邊長 `a, b, c`，先檢查是否能構成三角形（任兩邊之和 > 第三邊），若是：\n\n* 又為等邊（三邊相等） → 印「等邊三角形」\n* 又為等腰（任兩邊相等） → 印「等腰三角形」\n* 否則 → 印「一般三角形」\n  否則印「非三角形」。\n\n**程式提示：**\n\n```python\na, b, c = map(float, input(\"輸入三邊長，以空格分隔：\").split())\n# TODO: 巢狀 if：先檢查三角形成立條件，再進行分類\n```\n\n---\n\n## 題目 3：複合帳號安全檢查\n\n輸入密碼 `pwd`（字串）與安全性分數 `score`（0–100）：\n\n* 分數 ≥ 80 且密碼長度 ≥ 12 → 高安全\n* 分數 ≥ 50 且密碼長度 ≥ 8 → 中等安全\n* 否則 → 低安全\n\n**程式提示：**\n\n```python\npwd   = input(\"請輸入密碼：\")\nscore = int(input(\"請輸入安全性分數 (0-100)：\"))\n# TODO: if/elif 巢狀邏輯判斷安全等級\n```\n\n---\n\n## 題目 4：購物折扣與運費結合\n\n輸入購物金額 `amt` 與是否為 VIP（Y/N）：\n\n* 若 VIP 且金額 ≥1000 → 8 折，運費 免運\n* 若 金額 ≥500 → 9 折且運費 50\n* 否則 → 原價且運費 100\n\n**程式提示：**\n\n```python\namt = float(input(\"輸入金額：\"))\nis_vip = input(\"是否為 VIP (Y/N)：\").upper()\n# TODO: 多層 if 判斷折扣與運費\n```\n\n---\n\n## 題目 5：健康建議\n\n輸入是否吸菸 `smoke`（Y/N）、運動次數 `exercise`（每週次數）：\n\n* 若 吸菸 或 運動次數 <2 → 印「請改善生活習慣」\n* 其他 → 印「健康狀態良好」\n\n**程式提示：**\n\n```python\nsmoke = input(\"請問是否吸菸 (Y/N)：\").upper()\nexercise = int(input(\"每週運動次數：\"))\n# TODO: 使用 or 和 < 判斷\n```\n\n---\n\n## 題目 6：複合日期判斷\n\n輸入西元年份 `year` 與月份 `month`（1–12）：\n\n* 若 month==2：判閏年印該月天數\n* 若 month in \\[4,6,9,11]：印 30\n* 其他：印 31\n\n**程式提示：**\n\n```python\nyear  = int(input(\"輸入年份：\"))\nmonth = int(input(\"輸入月份：\"))\n# TODO: 巢狀 if 處理 2 月與閏年，其餘使用 elif\n```\n\n---\n\n## 題目 7：登入錯誤鎖定\n\n輸入使用者輸入嘗試次數 `tries` 與是否為管理員 `is_admin`（Y/N）：\n\n* 若 tries >5 且 不是管理員 → 印「帳號鎖定」\n* 若 tries >5 且 是管理員 → 印「請稍後再試」\n* 否則 → 印「可繼續嘗試」\n\n**程式提示：**\n\n```python\ntries    = int(input(\"輸入嘗試次數：\"))\nis_admin = input(\"是否為管理員 (Y/N)：\").upper()\n# TODO: 巢狀 if 或 and/or 組合\n```\n\n---\n\n## 題目 8：進階 FizzBuzz（二進位判斷）\n\n輸入一正整數 n，若 n 用二進位表示最後兩位為 \"00\" 且能被 3 整除，印 \"Fizz\"；能被 5 整除印 \"Buzz\"；兩者皆能印 \"FizzBuzz\"；否則印 n。\n\n**程式提示：**\n\n```python\nn = int(input(\"輸入正整數：\"))\nbin_suffix = bin(n)[-2:]\n# TODO: 使用 and/or 與字串比較結合 n%3, n%5\n```\n\n---\n\n## 題目 9：學生成績複合評等\n\n輸入平時作業平均 `hw`（0–100）與期末考 `exam`（0–100）：\n\n* 若 hw ≥70 且 exam ≥60 → 印「及格」\n* 若 hw <70 或 exam <60 → 印「不及格」\n* 狀況外 → 印「資料錯誤」\n\n**程式提示：**\n\n```python\nhw   = int(input(\"輸入作業平均：\"))\nexam = int(input(\"輸入期末考：\"))\n# TODO: 先檢查範圍合法，再巢狀判斷及格與否\n```\n\n---\n\n## 題目 10：複合資格進階檢查\n\n輸入會員等級 `level`（VIP/Regular）、酒精濃度 `bac`（血液酒精含量，0.0–0.3）：\n\n* 若 VIP 且 bac <0.05 → 印「可參加活動」\n* 若 Regular 且 bac <0.03 → 印「可參加活動」\n* 否則 → 印「禁止參加」\n\n**程式提示：**\n\n```python\nlevel = input(\"會員等級 (VIP/Regular)：\")\nbac   = float(input(\"輸入酒精濃度 (0-0.3)：\"))\n# TODO: 使用 and/or 分支巢狀判斷\n```",
+      "pythonExercise": {
+        "title": "菜就多練!",
+        "id": "condition-l3-homework-exercise"
+      },
+      "skills": [
+        {
+          "points": 50,
+          "name": "New Skill"
+        }
+      ],
+      "title": "邏輯運算與複雜條件判斷 — 進階練習題",
+      "tutorial": [],
+      "description": "針對「邏輯運算與複雜條件判斷」課程的進階練習"
+    },
+    {
+      "pythonExercise": {
+        "id": "condition-l4-homework-exercise",
+        "title": "菜就多練!"
+      },
+      "description": "針對「條件判斷的綜合應用」課程的進階練習",
+      "id": "condition-l4-homework",
+      "title": "條件判斷的綜合應用 — 進階練習題",
+      "content": "## 題目 1：電費計算\n\n讀取家庭用電度數 `kwh`，並依照以下階梯計算電費：\n\n* 0–120 度：每度 2 元\n* 121–330 度：每度 3 元\n* 331–500 度：每度 4 元\n* > 500 度：每度 5 元\n  > 最後印出總電費。\n\n```python\nkwh = int(input(\"輸入用電度數：\"))\n# TODO: 使用巢狀 if/elif 累加每階梯費用到 total\n```\n\n---\n\n## 題目 2：停車費率\n\n讀取停車時長 `hours`（小時，小數），與車種 (`car_type`,\"小客車\"/\"大貨車\")：\n\n* 小客車：前 2 小時 30 元/時，之後每小時 20 元\n* 大貨車：前 2 小時 50 元/時，之後每小時 30 元\n  印出總停車費，並在費用超過 500 元時加收管理費 100 元。\n\n```python\nhours    = float(input(\"輸入停車時長 (小時)：\"))\ncar_type = input(\"輸入車種 (小客車/大貨車)：\")\n# TODO: 根據車種與時長計算 base_fee，再判斷是否加收管理費\n```\n\n---\n\n## 題目 3：假日提醒\n\n讀取日期資訊 `weekday` (0=週日,1=週一…6=週六)，以及是否為國定假日 (`is_holiday`, Y/N)：\n\n* 若 `weekday` 為 0 或 6 **或** `is_holiday` == 'Y'，印「放假」；否則印「上班/上課」。\n\n```python\nweekday    = int(input(\"輸入星期幾 (0-6)：\"))\nis_holiday = input(\"是否國定假日 (Y/N)：\").upper()\n# TODO: if weekday in [0,6] or is_holiday == 'Y'\n```\n\n---\n\n## 題目 4：空氣品質提醒\n\n讀取 PM2.5 濃度 `pm25` (整數) 和使用者是否為過敏體質 (`allergy`, Y/N)：\n\n* 若 `pm25` > 150 或 (`allergy` == 'Y' 且 `pm25` > 100)，印「開啟空氣清淨機」；否則印「空氣良好」。\n\n```python\npm25    = int(input(\"輸入 PM2.5 濃度：\"))\nallergy = input(\"是否過敏體質 (Y/N)：\").upper()\n# TODO: if pm25 > 150 or (allergy == 'Y' and pm25 > 100)\n```\n\n---\n\n## 題目 5：VIP 存款優惠\n\n讀取存款金額 `deposit` 與帳戶類別 (`acct_type`，\"VIP\"/\"Regular\")：\n\n* VIP 且 deposit ≥ 100000 → 年利率 2%\n* Regular 且 deposit ≥ 50000 → 年利率 1%\n* 其他 → 年利率 0.5%\n  印出利息收益（利息 = deposit \\* rate）。\n\n```python\ndeposit  = float(input(\"輸入存款金額：\"))\nacct_type = input(\"輸入帳戶類別 (VIP/Regular)：\")\n# TODO: 判斷適用利率 rate，再計算利息\n```\n\n---\n\n## 題目 6：信用卡回饋分類\n\n讀取消費金額 `amount` 與回饋類型 (`rebate_type`，\"現金\"/\"點數\"/\"里程\")：\n\n* 現金：回饋率 1.2%\n* 點數：回饋率 2.0% 但需滿額 3000\n* 里程：回饋率 1.5%\n  若點數未達滿額，印「不符合點數回饋資格」；其餘印「回饋 X 元」。\n\n```python\namount      = float(input(\"輸入消費金額：\"))\nrebate_type = input(\"輸入回饋類型 (現金/點數/里程)：\")\n# TODO: 複合條件計算回饋，並處理點數滿額限制\n```\n\n---\n\n## 題目 7：出席與遲到管理\n\n讀取出席天數 `present_days` 與遲到次數 `late_count`：\n\n* 若 出席天數 ≥ 20 且 遲到次數 ≤ 2 → 印「通過考核」\n* 若 出席天數 < 20 且 遲到次數 ≤ 2 → 印「缺勤過多」\n* 若 遲到次數 > 2 → 印「遲到過多」\n\n```python\npresent_days = int(input(\"輸入出席天數：\"))\nlate_count   = int(input(\"輸入遲到次數：\"))\n# TODO: 巢狀 if 處理出席與遲到標準\n```\n\n---\n\n## 題目 8：訂單狀態判斷\n\n讀取訂單金額 `order_amt` 與是否符合活動 (`promo`, Y/N)：\n\n* 若 order\\_amt ≥ 2000 且 promo == 'Y'，印「免運＋9折」\n* 若 order\\_amt ≥ 2000，印「免運」\n* 若 promo == 'Y'，印「9折＋運費 100」\n* 否則，印「原價＋運費 100」\n\n```python\norder_amt = float(input(\"輸入訂單金額：\"))\npromo     = input(\"是否符合活動 (Y/N)：\").upper()\n# TODO: 多層條件順序判斷\n```\n\n---\n\n## 題目 9：線上考試違規判定\n\n讀取作答時間 `time_used`（分鐘）與是否有作弊紀錄 (`cheat`, Y/N)：\n\n* 若 cheat == 'Y' 或 time\\_used > exam\\_time\\_limit (預設 120 分)，印「失格」\n* 否則印「成績有效」\n\n```python\ntime_used = int(input(\"輸入作答時間 (分鐘)：\"))\ncheat     = input(\"是否有作弊 (Y/N)：\").upper()\nexam_time_limit = 120\n# TODO: if cheat == 'Y' or time_used > exam_time_limit\n```\n\n---\n\n## 題目 10：商品庫存與預購\n\n讀取 `stock`（庫存數量）與訂購數量 `order_qty`，以及是否允許預購 (`preorder`, Y/N)：\n\n* 若 order\\_qty ≤ stock，印「現有庫存，直接出貨」\n* 若 order\\_qty > stock 且 preorder == 'Y'，印「庫存不足，預購」\n* 否則，印「庫存不足，取消訂單」\n\n```python\nstock     = int(input())\norder_qty = int(input())\npreorder  = input().upper()\n# TODO: if/elif/else 判斷庫存與預購\n```",
+      "tutorial": [],
+      "skills": [
+        {
+          "name": "New Skill",
+          "points": 50
+        }
+      ],
+      "type": "python-exercise",
+      "experience": 100
+    }
+  ],
+  "order": 5,
+  "id": "conditionNclassification",
+  "title": "條件判斷與應用",
+  "__collections__": {}
+}

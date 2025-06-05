@@ -1,0 +1,219 @@
+{
+  "studentPermissions": [],
+  "title": "AI基礎與資料型別入門",
+  "id": "ai-basics",
+  "description": "學習AI 的基礎知識，包括AI的定義、發展史、用途和技術。",
+  "lessons": [
+    {
+      "tutorial": [],
+      "skills": [
+        {
+          "name": "PyTorch",
+          "points": 50
+        }
+      ],
+      "description": "在生活中我們如何應用AI呢?",
+      "quiz": {
+        "questions": [
+          {
+            "explanation": "AI 的核心概念是模擬人類智慧，透過大量的資料進行學習與決策，並非只是執行固定指令，也不具備人類的直覺與創造力。",
+            "question": "以下哪一項最能準確描述人工智慧（AI）？",
+            "options": [
+              "AI 只能執行固定的指令，無法學習新事物。",
+              "AI 主要用來設計遊戲角色，不能應用在其他領域。",
+              "AI 透過學習大量資料來執行像人類一樣的思考和決策。",
+              "AI 具備和人類一樣的直覺與創造力。"
+            ],
+            "id": "q1",
+            "correctAnswer": 2
+          },
+          {
+            "id": "q2",
+            "explanation": "監督式學習需要人類提供標記資料，例如訓練 AI 辨識貓和狗的照片時，標示哪張是貓、哪張是狗，讓 AI 學習辨識。",
+            "correctAnswer": 0,
+            "question": "以下哪種 AI 學習方式是透過「人類標記的資料」來學習的？",
+            "options": [
+              "監督式學習",
+              "非監督式學習",
+              "強化學習",
+              "隨機學習"
+            ]
+          },
+          {
+            "options": [
+              "朋友給你建議如何做決定",
+              "AI 幫助醫生分析 X 光片來診斷疾病",
+              "你根據經驗推測今天會下雨",
+              "你為考試準備筆記"
+            ],
+            "correctAnswer": 1,
+            "explanation": "AI 被廣泛應用於醫療領域，如影像識別技術可幫助醫生分析 X 光片，提高診斷的準確性，而人類自身的經驗和決策則不屬於 AI 的範疇。",
+            "question": "下列哪一項是 AI 在日常生活中的應用？",
+            "id": "q3"
+          },
+          {
+            "options": [
+              "AI 具備與人類相同的情感與道德判斷能力",
+              "AI 能夠像人類一樣直覺地學習新事物",
+              "AI 依賴於資料和演算法，而人類則能透過經驗和直覺學習",
+              "AI 的學習能力比人類更強，並且能創造出全新的概念"
+            ],
+            "correctAnswer": 2,
+            "question": "AI 和人類在智慧上的主要區別是什麼？",
+            "id": "q4",
+            "explanation": "AI 依賴於大量的資料和演算法來學習，無法像人類一樣透過直覺和經驗學習，也沒有情感或道德判斷能力。"
+          }
+        ],
+        "type": "quiz"
+      },
+      "type": "tutorial",
+      "title": "AI基礎",
+      "experience": 100,
+      "id": "ai_introduction1"
+    },
+    {
+      "tutorial": [],
+      "experience": 150,
+      "skills": [
+        {
+          "points": 75,
+          "name": "PyTorch"
+        }
+      ],
+      "type": "tutorial",
+      "title": "AI與人類智能的區別",
+      "description": "儘管AI能夠在某些任務上模擬人類的行為，但它和人類的智能還是有很大的區別。",
+      "id": "ai_introduction2",
+      "quiz": {
+        "fillInBlankQuestion": {
+          "explanation": "監督式學習需要標記資料進行訓練，約翰·麥卡錫在達特茅斯會議上提出 AI 概念。AI 無法擁有情感，因此它無法做出真正的道德判斷。在 YouTube 和 Netflix 等平台上，AI 會根據你的觀看歷史推薦你可能感興趣的影片。",
+          "text": "AI 的學習方式之一是透過人類提供的標記資料來學習，這種學習方式稱為 ___ 。約翰·麥卡錫（John McCarthy）在 1956 年的 ___ 會議中首次提出「人工智慧」這個概念。AI 無法像人類一樣擁有 ___ ，因此它的決策僅依賴數據分析，而無法做出真正的道德判斷。在 YouTube 或 Netflix 上，AI 會根據你的觀看歷史來提供 ___ ，讓你更容易找到感興趣的內容。",
+          "id": "autograd-basics",
+          "blanks": [
+            {
+              "correctAnswer": "監督式學習",
+              "id": "b1"
+            },
+            {
+              "id": "b2",
+              "correctAnswer": "達特茅斯"
+            },
+            {
+              "id": "b3",
+              "correctAnswer": "情感"
+            },
+            {
+              "id": "b4",
+              "correctAnswer": "影片推薦"
+            }
+          ],
+          "options": [
+            "監督式學習",
+            "非監督式學習",
+            "達特茅斯",
+            "劍橋",
+            "情感",
+            "感知",
+            "影片推薦",
+            "數據分析"
+          ]
+        },
+        "type": "fill-in-blank"
+      }
+    },
+    {
+      "tutorial": [],
+      "experience": 150,
+      "quiz": {
+        "fillInBlankQuestion": {
+          "blanks": [
+            {
+              "correctAnswer": "requires_grad",
+              "id": "c1"
+            },
+            {
+              "correctAnswer": "backward",
+              "id": "c2"
+            },
+            {
+              "correctAnswer": "grad",
+              "id": "c3"
+            }
+          ],
+          "id": "autograd-basics",
+          "options": [
+            "requires_grad",
+            "enable_grad",
+            "backward",
+            "forward",
+            "grad",
+            "gradient"
+          ],
+          "text": "PyTorch 中的自動微分系統使用 ___ 參數來啟用梯度計算。計算梯度時，我們調用 ___ 方法。梯度存儲在張量的 ___ 屬性中。",
+          "explanation": "在 PyTorch 中，requires_grad=True 用於啟用梯度計算，backward() 方法用於計算梯度，計算得到的梯度存儲在 .grad 屬性中。"
+        },
+        "type": "fill-in-blank"
+      },
+      "type": "tutorial",
+      "title": "常見的AI應用",
+      "id": "ai_introduction3",
+      "skills": [
+        {
+          "name": "PyTorch",
+          "points": 75
+        }
+      ],
+      "description": "理解 PyTorch 自動微分系統"
+    },
+    {
+      "tutorial": [],
+      "type": "python-exercise",
+      "title": "Python 基礎練習",
+      "experience": 150,
+      "id": "python_basics",
+      "skills": [
+        {
+          "points": 75,
+          "name": "PyTorch"
+        }
+      ],
+      "pythonExercise": {
+        "initialCode": "# 請在這裡編寫你的程式碼\n\n",
+        "description": "編寫一個簡單的 Python 程式，輸出 \"Hello, World!\"",
+        "testCases": [
+          {
+            "input": "",
+            "expectedOutput": "Hello, World!"
+          }
+        ],
+        "id": "hello_world",
+        "title": "你的第一個 Python 程式",
+        "explanation": "這是一個簡單的程式，用來測試 Python 的基本輸出功能。"
+      },
+      "description": "練習 Python 基本語法"
+    },
+    {
+      "tutorial": [],
+      "pythonExercise": {
+        "explanation": "print()#output list 由大到小排列 不重複\n\na = [1,2,3,8,45] \nb = [2,3,48,67,98]\n\nprint(list(set(a) & set(b)))#回傳[2,3]\nprint()#回傳(48,67,98)\nprint()#回傳a b全部值",
+        "description": "Exercise Description 練習dictionary python",
+        "initialCode": "print() #平均成績\n\nprint()#新增一個grava在最後面\n\nprint()#把水果都印出來欸\n\nprint()#取出67\n\nprint()#取出89",
+        "id": "dictionary_practice",
+        "title": "Exercise Title 字典~~~"
+      },
+      "description": "字典gpergpeorkgpergkergergerg",
+      "skills": [
+        {
+          "points": 50,
+          "name": "New Skill"
+        }
+      ],
+      "title": "字典的使用",
+      "experience": 100,
+      "type": "python-exercise",
+      "id": "python2"
+    }
+  ],
+  "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=1000",
+  "__collections__": {}
+}

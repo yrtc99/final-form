@@ -1,0 +1,180 @@
+{
+  "tags": [],
+  "difficulty": "beginner",
+  "description": "本課程強調資料結構在日常生活與程式設計中的應用,建立扎實的資料處理基礎。",
+  "image": "https://plus.unsplash.com/premium_vector-1737035103418-18ca087650d5?q=80&w=2360&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "title": "資料結構",
+  "lessons": [
+    {
+      "content": "## 課程目標\r\n- 了解 Dictionary（鍵值對）的概念與特性\r\n- 掌握新增、查找、修改、刪除操作\r\n- 認識 Dictionary 在日常與程式開發中的應用\r\n\r\n---\r\n\r\n## 1. Dictionary 是什麼？\r\n- 將「鍵（Key）」對應到「值（Value）」的資料結構\r\n- 類比：辭典（詞→解釋）、電話簿（名→號碼）、圖書館索引（標題→位置）\r\n\r\n```python\r\n# 範例\r\nmy_dict = {\"鳳凰\": \"傳說中的火鳥\", \"龍\": \"控制風與火的生物\"}\r\nprint(my_dict[\"龍\"])  # 輸出：控制風與火的生物\r\n```\r\n\r\n---\r\n\r\n## 2. 主要特性\r\n1. **Key 唯一**：重複鍵會覆蓋原有值\r\n2. **Value 類型任意**：數字、字串、列表，甚至另一個字典\r\n3. **查找速度快**：O(1) 哈希表實現\r\n\r\n---\r\n\r\n## 3. 基本操作\r\n\r\n```python\r\n# 建立空字典\r\ndata = {}\r\n\r\n# 新增 / 修改\r\ndata[\"貓\"] = \"小動物\"\r\n\r\n# 查找\r\nprint(data.get(\"貓\"))       # 小動物\r\n# 或直接訪問\r\nprint(data[\"貓\"])           # 小動物\r\n\r\n# 刪除\r\ndel data[\"貓\"]\r\n```\r\n\r\n---\r\n\r\n## 4. 應用範例\r\n- **學生成績**: `scores = {\"小明\": 95, \"小美\": 88}`\r\n- **商品價格**: `prices = {\"鉛筆\": 10, \"橡皮\": 5}`\r\n- **AI 聊天機器人**: 問題→回答映射\r\n- **遊戲開發**: 角色屬性、道具庫存管理\r\n\r\n---\r\n\r\n## 5. 小結\r\n- Dictionary 是鍵值對映射，適合快速查找\r\n- 鍵必須唯一，值可重複或複雜\r\n- 常見於資料查詢、映射關係管理等場景\r\n\r\n",
+      "skills": [
+        {
+          "name": "New Skill",
+          "points": 50
+        }
+      ],
+      "title": "Dictionary 介紹與應用",
+      "experience": 100,
+      "tutorial": [],
+      "type": "python-exercise",
+      "description": "了解 Dictionary(字典)的基本概念，透過遊戲與實作，加深對鍵值對應的理解",
+      "id": "ds_dictionary",
+      "pythonExercise": {
+        "id": "dictionary_practice",
+        "explanation": "magic_book = {}\nmagic_book[\"\"] = \"\"",
+        "title": "魔法筆記本的第一筆記錄",
+        "initialCode": "# 設計一個字典\"magic_book\"\n\n# 設計一個\"鍵\"叫做\"紅色的水果\"\n\n# print()",
+        "description": "小魔法師艾莉絲獲得一本筆記本，請她記下第一筆資料：「apple」是「紅色的水果」。\n👉 提示：建立空字典後，使用 `字典[\"鍵\"] = 值` 加入資料。"
+      }
+    },
+    {
+      "title": "如何新增、修改和刪除資訊?",
+      "type": "python-exercise",
+      "description": "了解DICTIONARY的基本操作",
+      "tutorial": [],
+      "content": "---\n\n## Q2. 問問筆記本裡的水果\n🍌 艾莉絲想知道筆記本中「banana」對應的是什麼描述，請幫她查詢。\n\n👉 **提示**：使用 `print(字典[\"banana\"])` 來印出對應的值。\n\n---\n\n## Q3. 修正錯誤的記錄\n🥝 小精靈誤將 `\"dragonfruit\"` 記成了「會噴火的水果」，需要把這條錯誤記錄刪掉。\n\n👉 **提示**：使用 `del 字典[\"dragonfruit\"]` 來刪除該項目。\n\n---\n\n## Q4. 檢查筆記本中是否有這項目\n📘 艾莉絲想確認筆記本中是否已經記錄了 `\"grape\"`，請撰寫程式判斷並回傳布林值。\n\n👉 **提示**：使用 `\"grape\" in 字典` 來檢查鍵是否存在。\n\n",
+      "pythonExercise": {
+        "description": "根據提示操作字典~",
+        "initialCode": "magic_book = {\n    \"apple\": \"紅色的水果\",\n    # 繼續寫你喜歡的水果\n\n}\n\n# print(字典[\"鍵\"])\n\n# del 字典[\"鍵\"]\n\n# \"鍵\" in 字典",
+        "id": "dictionary2",
+        "title": "字典的操作與應用"
+      },
+      "experience": 100,
+      "id": "ds-dictionary2",
+      "skills": [
+        {
+          "points": 50,
+          "name": "New Skill"
+        }
+      ]
+    },
+    {
+      "skills": [
+        {
+          "points": 50,
+          "name": "New Skill"
+        }
+      ],
+      "pythonExercise": {
+        "initialCode": "# 建立龍能力字典\n\n# 將龍的多項能力存入列表\n\n# 顯示整個字典\n\n# 輸出output",
+        "description": "🐉 將「dragon」的能力記成列表，包括「噴火」、「飛行」、「守寶藏」。\n\n👉 **提示**：值可以是列表，使用中括號包起來。\n",
+        "id": "dictionary3",
+        "title": "龍的多重能力"
+      },
+      "title": "記成列表",
+      "description": "學習如何列表",
+      "content": "## 將內容記成列表\n\n想像你在經營一間寵物收容所，需要記錄不同動物的多項特徵。舉例來說，「cat」這個鍵應該對應到一個列表，裡面包含「長毛」、「愛撒嬌」、「夜間活動」等多種特性。透過將字典的值設定為列表，可以讓你一次查詢該動物的所有屬性，並且方便後續新增或移除某些特質。\n\n```python\n# 建立寵物特徵字典\npet_traits = {}\n# 將貓咪的多重特徵存入列表\npet_traits[\"cat\"] = [\"長毛\", \"愛撒嬌\", \"夜間活動\"]\n# 顯示整個字典\nprint(pet_traits)\n\n# 輸出output\n{'cat': ['長毛','愛撒嬌','夜間活動']}\n```\n\n",
+      "tutorial": [],
+      "id": "ds-dictionary3",
+      "type": "python-exercise",
+      "experience": 100
+    },
+    {
+      "skills": [
+        {
+          "points": 50,
+          "name": "New Skill"
+        }
+      ],
+      "pythonExercise": {
+        "id": "dictionary4",
+        "description": "✨ 計算下列魔法師的平均魔力分數，\n艾莉絲80分；路西90分；米卡70分。\n👉 提示：使用 `sum(字典.values()) / len(字典)`。",
+        "initialCode": "# 建立學員的分數字典\nmagic_power = {\n    \"艾莉絲\": 80,     \n    #寫出學員與其分數\n \n     \n    \n}\n\n\n# 平均 = 魔力值總和/魔法師人數  \n\n\nprint(\"平均魔力值：\", average)",
+        "title": "計算魔力平均"
+      },
+      "experience": 100,
+      "type": "python-exercise",
+      "tutorial": [],
+      "id": "ds-dictionary4",
+      "description": "在 Python 中，sum() 用來計算可疊代物件中所有元素的總和，len() 用來取得可疊代物件中元素的個數。下面透過範例一步步練習。",
+      "title": "`sum()` 與 `len()` 用法教學",
+      "content": "\n## 1. sum() 的基本用法  \n- 語法：`sum(iterable)`  \n- 功能：回傳 iterable 中所有元素的加總。  \n\n```python\n# 範例 1：對 list 加總\nnums = [1, 2, 3, 4]\ntotal = sum(nums)\nprint(total)        # 輸出：10\n```\n\n\n---\n\n## 2. sum()應用於字典的 values()\n- 取出字典中所有值，再加總。  \n\n```python\n# 範例 3：對字典的 values 加總\nscores = {\"小明\": 90, \"小美\": 85, \"阿強\": 78}\ntotal_score = sum(scores.values())\nprint(total_score)  # 輸出：253\n```\n\n---\n\n## 3. len()的基本用法  \n- 語法：`len(s)`  \n- 功能：回傳序列或容器 `s` 中的元素個數。  \n\n```python\nfruits = [\"apple\", \"banana\", \"cherry\"]\nprint(len(fruits))  # 輸出：3\n```\n\n---\n\n## 綜合練習：計算平均身高    \n👨‍👩‍👧‍👦 班級同學在體育課測量了身高，現在要計算全班的平均身高，並印出結果。\n\n```python\n# 已有同學身高紀錄（公分）\nheights = {\n    \"小明\": 160,\n    \"小美\": 155,\n    \"阿強\": 170\n}\n\n# 計算平均身高\naverage_height = sum(heights.values()) / len(heights)\n\n# 印出結果\nprint(\"平均身高：\", average_height, \"cm\")\n```\n\n執行結果會顯示：\n```\n平均身高： 161.66666666666666 cm\n"
+    },
+    {
+      "description": "使用 zip() 和 dict() 建立配對字典",
+      "skills": [
+        {
+          "points": 50,
+          "name": "New Skill"
+        }
+      ],
+      "id": "ds-dictionary5",
+      "content": "## 使用 zip() 和 dict() 建立配對字典\n\n在 Python 中，當我們有兩個平行的序列，想要把它們一一對應成「鍵→值」，可以搭配使用：\n\n1. **zip(iter1, iter2)**  \n   - 會將 iter1 與 iter2 中相同位置的元素打包成一個個二元組。  \n   - 例如：  \n     ```python\n     a = [1, 2, 3]\n     b = ['x', 'y', 'z']\n     list(zip(a, b))  \n     # 結果：[(1, 'x'), (2, 'y'), (3, 'z')]\n     ```\n\n2. **dict()**  \n   - 可以將一系列二元組（或其他可轉為鍵值對的結構）一次轉成字典。  \n   - 例如：  \n     ```python\n     pairs = [(1, 'x'), (2, 'y'), (3, 'z')]\n     dict(pairs)\n     # 結果：{1: 'x', 2: 'y', 3: 'z'}\n     ```\n\n---\n\n### 圖書館書籍與 ISBN 配對範例\n\n假設有兩個列表：  \n```python\nbooks = [\"1984\", \"Brave New World\", \"Fahrenheit 451\"]\nisbns = [\"9780451524935\", \"9780060850524\", \"9781451673319\"]\n```\n\n我們先用 zip(books, isbns) 把書名和 ISBN 打包，再用 dict() 轉成配對字典：\n```python\nlibrary_ids = dict(zip(books, isbns))\nprint(library_ids)\n```\n執行後會得到:\n```python\n{'1984': '9780451524935',\n 'Brave New World': '9780060850524',\n 'Fahrenheit 451': '9781451673319'}\n\n```\n如此一來，就能快速建立「書名 → ISBN」的配對字典，方便之後查詢與管理！\n\n",
+      "experience": 100,
+      "pythonExercise": {
+        "initialCode": "# 寫出students, wands的list\n\n\n# 使用 zip() 搭配 dict()\n\n# print出結果",
+        "description": "給定兩個 list，幫每位學徒配對魔杖。\n\n在分配魔杖儀式中，你有一張學徒名單和一張魔杖清單，需要將它們一一對應起來，讓每位學徒獲得自己的專屬魔杖。\n\n學徒(names)有: \"艾莉絲\", \"路西\", \"米卡\"。\n學徒自己的魔杖(wands):\"W001\", \"W002\", \"W003\"。\n\n👉 提示：使用 `zip()` 搭配 `dict()`。",
+        "id": "dictionary5",
+        "title": "Q7. 魔杖配對任務"
+      },
+      "type": "python-exercise",
+      "title": "對應關係",
+      "tutorial": []
+    },
+    {
+      "experience": 100,
+      "title": "在字典中使用迴圈",
+      "skills": [
+        {
+          "points": 50,
+          "name": "New Skill"
+        }
+      ],
+      "tutorial": [],
+      "pythonExercise": {
+        "id": "dictionary6",
+        "initialCode": "text = \"abracadabra\"\n\n# 建立一個字典叫做count\n\n# 在for迴圈內，使用if/else判斷是否有遇到該字元\n\n",
+        "title": "練習迴圈 - 統計中每個字元出現幾次",
+        "description": "🔠 統計 \"abracadabra\" 中每個字元出現幾次。\n👉 提示：用迴圈搭配字典記錄次數，先判斷鍵是否存在。"
+      },
+      "content": "## Q8 教學：統計字元出現次數\n\n當我們想要知道一段文字中每個字元出現了多少次時，可以利用 **字典** 當作「計數器」，流程如下：\n\n1. **建立一個空字典**，用來儲存「字元 → 次數」。  \n2. **逐一遍歷**字串中的每個字元。  \n3. **判斷字典中是否已經有該字元這個鍵**：  \n   - 如果有，則將對應的值（次數）加 1。  \n   - 如果沒有，則新增該鍵並將值設為 1。  \n4. 最後，字典裡就會存放所有字元及它們的出現次數。\n\n---\n\n### 範例：統計 \"mississippi\" 中字元次數\n\n```python\ntext = \"mississippi\"\ncount = {}  # 空字典作為計數器\n\nfor ch in text:\n    if ch in count:\n        count[ch] += 1   # 已經有此字元，次數加 1\n    else:\n        count[ch] = 1    # 第一次出現，次數設為 1\n\nprint(count)\n```\n執行結果會顯示：\n\n```python\n{'m': 1, 'i': 4, 's': 4, 'p': 2}\n\n```\n透過這個模式，你可以快速統計任意字串或文本中各個字元的出現頻率，也能應用在更複雜的文字分析或統計任務中！",
+      "type": "python-exercise",
+      "description": "當我們想要知道一段文字中每個字元出現了多少次時，可以利用 字典 當作「計數器」。",
+      "id": "ds-dictionary6"
+    },
+    {
+      "experience": 100,
+      "description": "如何從字典中找出「值最大」的那個鍵? ",
+      "id": "ds-dictionary7",
+      "type": "tutorial",
+      "pythonExercise": {
+        "title": "最強魔法師是誰?",
+        "id": "dictionary7",
+        "initialCode": "# 建立scores字典\n# 艾莉絲88分, 路西92分, 米卡85分\n\n# top = \n\n# print出結果",
+        "description": "🌟 找出分數最高的魔法師與他的分數。\n👉 提示：使用 `max(字典, key=字典.get)` 找出最大值。"
+      },
+      "tutorial": [],
+      "content": "## Q9. 找出最高鍵值\n\n當我們想要從字典中找出「值最大」的那個鍵，可以使用：\n\n```python\nmax(dict_obj, key=dict_obj.get)\n```\n* dict_obj：欲搜尋的字典\n\n* key=dict_obj.get：指示 max() 用字典的值（透過 get 方法）作為比較依據\n### 範例：找出最貴的商品\n假設有一個字典 product_prices，記錄各種商品的價格（單位：元）：\n```python\nproduct_prices = {\n    \"蘋果\": 25,\n    \"香蕉\": 15,\n    \"西瓜\": 80,\n    \"鳳梨\": 50\n}\n\n# 要找出「價格最高的商品」與其價格，可以這樣寫：\nmost_expensive = max(product_prices, key=product_prices.get)\nprint(\"最貴的商品是\", most_expensive, \"，價格為\", product_prices[most_expensive], \"元\")\n```\n執行結果會顯示：\n```python\n最貴的商品是 西瓜 ，價格為 80 元\n```\n透過 max(..., key=…) 搭配 dict.get，就能在一行內快速找出字典中「值最大」的那個鍵！",
+      "skills": [
+        {
+          "name": "New Skill",
+          "points": 50
+        }
+      ],
+      "title": "找出最大的值"
+    },
+    {
+      "tutorial": [],
+      "type": "python-exercise",
+      "id": "ds-dictionary8",
+      "content": "## Q10. 找出指定口味的食物\n\n有時我們需要從字典中篩選出符合特定條件的鍵，例如「值等於某個風味」。  \n流程如下：\n\n1. 使用 `.items()` 同時取得「鍵」與「值」。  \n2. 在 `for` 迴圈中，判斷當前值是否等於目標風味。  \n3. 若符合條件，將該鍵加入結果清單。  \n\n---\n\n### 範例：篩選 “sweet” 風味的食物\n\n```python\n# 食物對應風味字典（酸 sour、甜 sweet、苦 bitter、辣 spicy）\nfoods = {\n    \"檸檬\":    \"sour\",\n    \"巧克力\":  \"sweet\",\n    \"咖啡\":    \"bitter\",\n    \"辣椒\":    \"spicy\",\n    \"草莓\":    \"sweet\",\n    \"葡萄柚\":  \"sour\"\n}\n\nsweet_foods = []                       # 用來存放甜味食物的清單\nfor name, taste in foods.items():      # 逐一遍歷食物名稱與風味\n    if taste == \"sweet\":               # 判斷風味是否為 \"sweet\"\n        sweet_foods.append(name)       # 符合條件就加入清單\n\nprint(\"甜味的食物有：\", sweet_foods)\n```\n執行結果會顯示：\n```python\n甜味的食物有： ['巧克力', '草莓']\n```",
+      "skills": [
+        {
+          "points": 50,
+          "name": "New Skill"
+        }
+      ],
+      "description": "有時我們需要從字典中篩選出符合特定條件的鍵，怎麼做?",
+      "title": "找出「特定值」的物品",
+      "experience": 100,
+      "pythonExercise": {
+        "description": "🎨 找出所有顏色為 \"red\" 的魔法物品。\n👉 提示：用 for 迴圈遍歷字典，判斷值是否等於 \"red\"。\n",
+        "title": "Q10. 找出指定顏色的魔法物品",
+        "initialCode": "# 建立magic_item字典\n# apple, rose, lava stone為red\n# banana是 yellow\n# cactus是green\n\n# 建立 red_items字串來儲存\n\n# for迴圈遍歷是red_items的物品\n\n\n\n# print",
+        "id": "dictionary8"
+      }
+    }
+  ],
+  "id": "data-structure",
+  "__collections__": {}
+}

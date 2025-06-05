@@ -1,0 +1,50 @@
+{
+  "title": "變數與資料",
+  "description": "變數就是「儲存資料的容器」，你可以把它想像成一個標籤，貼在一個值（數字、文字、布林值……）上，以後就可以用變數名稱快速取用或修改這個值。",
+  "lessons": [
+    {
+      "title": "變數的基本概念與應用",
+      "experience": 100,
+      "pythonExercise": {
+        "initialCode": "# 請建立一個變數 `wizard_name`，將 `\"小奇\"` 存入。\n# 提示：使用 `變數 = \"文字\"` 記住名字。\n\n\n# 筆電說：「製作一張魔法名片吧！」\n\n# 請建立：wizard_name = \"小奇\",wizard_age = 10,element = \"雷電\"\n\n# 印出 \"我是小奇，今年10歲，擅長雷電魔法！\"\n# 提示：記得用 `str()` 將數字轉文字。\n",
+        "id": "param1",
+        "title": "建立變數",
+        "description": "📛 小奇的魔法筆電說：「我需要知道你的名字才能啟動！」  \n"
+      },
+      "id": "param-l1",
+      "description": "認識什麼是變數,並了解變數的用途。",
+      "type": "python-exercise",
+      "skills": [
+        {
+          "points": 50,
+          "name": "New Skill"
+        }
+      ],
+      "content": "## 什麼是變數?\n\n在筆電的指引下,小奇坐在椅子上開始輸入自己的名字。筆電提醒他:「你不能\n只是說 '小奇',你要給這個資訊一個名稱,像是貼上標籤的盒子,這樣我才能記\n住它。」\n\n「那我叫這個盒子 name,然後裡面裝的是我的名字 '小奇',可以嗎?」小奇問。\n\n筆電亮了一下,說:「沒錯!你剛剛寫的是:\n```python\nname = \"小奇\"\n```\n\n這就是你的第一個變數了。你幫我建立了一個記憶寶盒,名字叫 name,裡面放\n著 '小奇'。」\n\n小奇高興地發現,只要使用這個 name,就可以讓筆電記得他的名字。他開始期\n待用更多寶盒來裝進他的一天。",
+      "tutorial": []
+    },
+    {
+      "id": "param-l2",
+      "title": "區域變數",
+      "content": "## Q11. 能力升級後的強化計算\n🧙‍♂️ 小奇擊敗兩隻怪獸，獲得了不同的獎勵。\n\n```python\nlevel = 5\nexp = 120\n```\n\n- 第一隻怪獸：等級 +1，經驗值 +50\n- 第二隻怪獸：等級 +2，經驗值 +80\n\n請更新變數，並印出：\n```\n目前等級：8，總經驗值：250\n```\n\n---\n\n## Q12. 自動裝備整理\n🎒 小奇的裝備背包亂了，請協助他統一更新裝備：\n\n```python\nweapon = \"火焰之劍\"\nshield = \"木盾\"\npotion = \"空瓶子\"\n```\n\n他決定改為：\n- 換上 `\"閃電短刀\"`\n- 升級盾為 `\"鑽石盾\"`\n- 補滿藥水為 `\"治療藥水\"`\n\n請更新變數並輸出完整句子：\n```\n小奇裝備了閃電短刀與鑽石盾，背包中有一瓶治療藥水。\n```\n\n---\n\n## Q13. 技能說明函式\n🧾 小奇希望把技能說明包裝成一個可以重複呼叫的函式。\n\n請定義：\n```python\ndef skill_card(name, cooldown):\n    # 請補上這行\n```\n\n當呼叫 `skill_card(\"火球術\", 5)` 時，會印出：\n```\n技能：火球術，冷卻時間：5 秒\n```\n\n---\n\n## Q14. 交換角色與狀態\n🎭 小奇與他的搭檔進行角色與狀態交換：\n\n```python\nhero = \"小奇\"\nstatus = \"受傷\"\npartner = \"小羽\"\npartner_status = \"健康\"\n```\n\n請交換兩人的角色與狀態，印出：\n```\n小羽（受傷）與小奇（健康）完成交換！\n```\n\n---\n\n## Q15. 經驗值進階計算\n🧮 每當小奇打怪成功，他會獲得：\n- 基礎經驗：60\n- 額外加乘值：15%\n- 獎勵經驗：20 點\n\n請計算總經驗值（含加乘後），並印出最終結果（小數保留一位）：\n```\n總經驗值為：89.0 點\n```\n\n---\n\n## Q16. 多技能介紹函式\n🔁 請設計一個函式 `introduce_skills(name, skills)`，其中 skills 是一個用逗號分隔的字串，例如：\n\n```python\nintroduce_skills(\"小奇\", \"火球術,冰牆,風刃\")\n```\n\n印出：\n```\n小奇擁有的技能有：火球術、冰牆、風刃。\n```\n\n---\n\n## Q17. 檢查技能是否可用\n🧠 小奇有技能 `\"火球術\"`，但冷卻時間還有 3 秒，他輸入：\n\n```python\nskill = \"火球術\"\ncooldown = 3\n```\n\n請判斷並印出：\n```\n火球術還不能使用，請等待 3 秒。\n```\n\n---\n\n## Q18. 多日簽到獎勵細節\n📅 玩家每天登入可獲得 150 金幣，但第 5 天起有額外加碼 50 金幣。\n\n請計算 7 天的總獎勵金額，並印出：\n```\n小奇七天共獲得：1150 金幣。\n```\n\n---\n\n## Q19. 冒險報告產生器\n📝 請寫一個函式 `report(name, place, item)`，傳入冒險者名字、地點與發現的物品。\n\n例如：\n```python\nreport(\"小奇\", \"熔岩洞穴\", \"魔法寶石\")\n```\n\n印出：\n```\n冒險者小奇在熔岩洞穴中，發現了魔法寶石！\n```\n\n---\n\n## Q20. 型別判斷與轉換練習\n🧩 請給出以下每個變數的型別，並嘗試將其轉為另一種型別（若可轉換）：\n\n```python\na = \"15\"\nb = 12\nc = \"3.14\"\nd = \"魔法\"\n```\n\n請寫出：\n- 型別判斷（使用 `type()`）\n- 成功轉換後的值與型別（例如：`int(a)` 是什麼）\n\n",
+      "pythonExercise": {
+        "description": "以下有10題，請練習",
+        "id": "param2",
+        "title": "練習區域變數"
+      },
+      "skills": [
+        {
+          "name": "New Skill",
+          "points": 50
+        }
+      ],
+      "experience": 100,
+      "tutorial": [],
+      "description": "區域變數Lesson description",
+      "type": "python-exercise"
+    }
+  ],
+  "image": "https://plus.unsplash.com/premium_vector-1682299257648-a19f5879e226?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "id": "parameterNdata",
+  "__collections__": {}
+}
