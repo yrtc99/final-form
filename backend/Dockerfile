@@ -12,5 +12,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Gunicorn 是 Render 上最省事的 WSGI server
-EXPOSE 8000
+EXPOSE 10000
 CMD ["gunicorn", "-b", "0.0.0.0:8000", "app:create_app()"]
