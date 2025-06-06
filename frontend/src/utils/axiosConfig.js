@@ -2,6 +2,11 @@ import axios from 'axios';
 
 // 簡化的 axios 配置，不使用 JWT
 const setupAxios = () => {
+  // 設置 API 基礎 URL
+  axios.defaults.baseURL = process.env.NODE_ENV === 'production' 
+    ? 'https://final-form-u0o0.onrender.com' 
+    : 'http://localhost:5000';
+    
   // 設置請求攔截器，添加通用配置
   axios.interceptors.request.use(
     config => {
