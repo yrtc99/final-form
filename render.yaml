@@ -1,0 +1,20 @@
+# 根目錄 render.yaml
+services:
+  # --- Flask 後端 ---
+  - name: final-form-api
+    type: web
+    env: docker
+    dockerfilePath: backend/Dockerfile
+    envVars:
+      - key: DATABASE_URL       # Render 部署 Postgres 後自動注入
+        fromDatabase:
+          name: final-form-db
+          property: connectionString
+    healthCheckPath: /health   # 你可以在 Flask 新增一條 /health 路由供 Render 檢查
+
+  # --- React 前端 (純靜態) ---
+  - name: final-form-ui
+    type: static
+    buildCommand: |
+      cd frontend && npm install && npm run build
+    staticPublishPath: frontend/build
