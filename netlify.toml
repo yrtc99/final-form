@@ -1,0 +1,4 @@
+[build]
+base    = "frontend"            # 只在這個子資料夾裡安裝依賴、跑 build
+command = "npm install && npm run build"
+publish = "frontend/build"      # CRA/Vite 預設產物資料夾
