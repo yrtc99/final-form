@@ -35,8 +35,8 @@ def create_app(test_config=None):
     # Initialize extensions with app
     db.init_app(app)
     migrate.init_app(app, db)
-    # 配置 CORS 以接受任何源的請求
-    CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
+    # 配置 CORS 以接受特定源的請求
+    CORS(app, resources={r"/*": {"origins": ["https://ailiteracy4alltest.netlify.app", "http://localhost:3000"]}}, supports_credentials=True)
     # jwt.init_app(app) # JWT Removed
 
     # Register blueprints
