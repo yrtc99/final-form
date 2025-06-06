@@ -102,7 +102,6 @@ const LessonView = () => {
         setLesson(adaptedLesson);
       } catch (err) {
         setError('載入課程資料失敗');
-        console.error(err);
       } finally {
         setLoading(false);
       }
@@ -131,7 +130,6 @@ const LessonView = () => {
       // 清除測試結果
       setResponse(null);
     } catch (error) {
-      console.error('Error executing code:', error);
       setCodeOutput(error.response?.data?.error || error.message || '執行代碼時發生錯誤');
     } finally {
       setCodeRunning(false);
@@ -168,7 +166,6 @@ const LessonView = () => {
         });
       }
     } catch (error) {
-      console.error('Error running code:', error);
       
       // 處理 422 錯誤（通常是認證問題）
       if (error.response?.status === 422) {
@@ -216,20 +213,7 @@ const LessonView = () => {
     if (!((lesson.content_type === 'multiple_choice' && lesson.content) || (lesson.multiple_choice_questions && lesson.multiple_choice_questions.length > 0))) return;
     
     try {
-      // 根據content_type調整submissions格式
-      let submissions;
-      
-      if (lesson.content_type === 'multiple_choice') {
-        // 使用content數據結構
-        submissions = { answers: selectedOptions };
-      } else {
-        // 使用數組數據結構
-        submissions = Object.entries(selectedOptions).map(([questionId, optionIndex]) => ({
-          question_id: parseInt(questionId),
-          selected_option_index: optionIndex
-        }));
-      }
-      
+      // 移除未使用的 submissions 變量，直接在請求中構建數據
       const response = await axios.post(`/api/progress/multiple-choice/${lessonId}`, {
         answers: selectedOptions
       });
@@ -385,7 +369,7 @@ const LessonView = () => {
       
       <Box sx={{ width: '100%' }}>
         <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 4 }}>
-          {steps.map((step, index) => (
+          {steps.map((step) => (
             <Step key={step.label}>
               <StepLabel StepIconComponent={() => step.icon}>{step.label}</StepLabel>
             </Step>
@@ -474,9 +458,9 @@ const LessonView = () => {
                               分數：<strong>{response.score || 0}</strong>/{response.max_score || 100}
                             </Typography>
                           </Box>
-                          {response.test_results.map((test, index) => (
+                          {response.test_results.map((test) => (
                             <Paper
-                              key={index}
+                              key={test.test_case}
                               variant="outlined"
                               sx={{
                                 p: 1.5,

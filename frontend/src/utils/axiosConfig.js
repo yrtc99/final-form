@@ -30,7 +30,8 @@ const setupAxios = () => {
             }
           }
         } catch (e) {
-          console.error('Error parsing user data:', e);
+          // 移除未定義的 setError 調用，使用靜默錯誤處理
+          // 在攔截器中發生錯誤不應該影響應用程序的整體狀態
         }
       }
       
@@ -41,17 +42,6 @@ const setupAxios = () => {
     }
   );
   
-  // 設置響應攔截器來處理錯誤
-  axios.interceptors.response.use(
-    response => response,
-    error => {
-      // 簡化的錯誤處理
-      if (error.response) {
-        console.error('API Error:', error.response.status, error.response.data);
-      }
-      return Promise.reject(error);
-    }
-  );
 };
 
 export default setupAxios;

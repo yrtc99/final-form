@@ -7,12 +7,10 @@ import {
   Paper,
   Card,
   CardContent,
-  CardMedia,
   CircularProgress,
   Alert,
   Chip,
   Tooltip,
-  Divider,
   LinearProgress
 } from '@mui/material';
 import axios from 'axios';
@@ -47,7 +45,6 @@ const Achievements = () => {
       setAchievements(response.data);
     } catch (err) {
       setError('Failed to load achievements data');
-      console.error(err);
     } finally {
       setLoading(false);
     }

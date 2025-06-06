@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { 
   Card, 
   CardContent, 
-  CardActions, 
   CardActionArea,
   Button 
 } from '@mui/material';
@@ -26,7 +25,6 @@ import axios from 'axios';
 import { 
   School, 
   Assessment, 
-  Schedule, 
   Notifications, 
   TrendingUp, 
   Assignment,
@@ -59,9 +57,8 @@ ChartJS.register(
 );
 
 const StudentDashboard = () => {
-  const [dashboardData, setDashboardData] = useState(null);
+  const [dashboardData, setDashboardData] = useState({});
   const [recentActivity, setRecentActivity] = useState([]);
-  const [enrolledCourses, setEnrolledCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -77,28 +74,21 @@ const StudentDashboard = () => {
       setLoading(true);
       setError('');
       
-      // Fetch dashboard summary data, recent activity, and enrolled courses in parallel
+      // Fetch dashboard summary data and recent activity in parallel
       const dashboardPromise = axios.get(`/api/student/dashboard?student_id=${currentUser.id}`);
       const activityPromise = axios.get(`/api/student/activity?student_id=${currentUser.id}`);
-      const enrolledCoursesPromise = axios.get(`/api/courses/enrolled?student_id=${currentUser.id}`);
       
-      const [dashboardResponse, activityResponse, enrolledCoursesResponse] = await Promise.all([
+      const [dashboardResponse, activityResponse] = await Promise.all([
         dashboardPromise, 
-        activityPromise, 
-        enrolledCoursesPromise
+        activityPromise
       ]);
       
-      console.log('Dashboard API Response:', dashboardResponse.data);
-      console.log('Activity API Response:', activityResponse.data);
-      console.log('Enrolled Courses API Response:', enrolledCoursesResponse.data);
 
       setDashboardData(dashboardResponse.data);
       setRecentActivity(activityResponse.data.activities || []);
-      setEnrolledCourses(enrolledCoursesResponse.data.courses || []);
       
     } catch (err) {
       setError('載入儀表板數據失敗。請嘗試刷新頁面。');
-      console.error("Error fetching dashboard/activity data:", err.response || err.message || err);
     } finally {
       setLoading(false);
     }
@@ -107,10 +97,6 @@ const StudentDashboard = () => {
   useEffect(() => {
     fetchDashboardData();
   }, [fetchDashboardData]);
-
-  console.log('Current dashboardData state:', dashboardData);
-  console.log('Current recentActivity state:', recentActivity);
-  console.log('Current enrolledCourses state:', enrolledCourses);
 
   if (loading) {
     return (

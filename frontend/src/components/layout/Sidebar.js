@@ -13,23 +13,21 @@ import {
 import { 
   Dashboard, 
   School, 
-  Book, 
   People, 
   Settings,
   MenuBook,
-  Assignment,
   Person,
   Analytics,
-  Class,
   EmojiEvents,
   QuestionAnswer
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import PropTypes from 'prop-types';
 
 const drawerWidth = 240;
 
-const Sidebar = ({ open, toggleDrawer }) => {
+const Sidebar = ({ open }) => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -58,7 +56,7 @@ const Sidebar = ({ open, toggleDrawer }) => {
       variant="persistent"
       open={open}
       sx={{
-        width: open ? drawerWidth : 0, // 🔧 關鍵修正：open 時為 240px，關閉時為 0
+        width: open ? drawerWidth : 0, 
         flexShrink: 0,
         transition: theme => theme.transitions.create('width', {
           easing: theme.transitions.easing.sharp,
@@ -107,6 +105,10 @@ const Sidebar = ({ open, toggleDrawer }) => {
       </Box>
     </Drawer>
   );
+};
+
+Sidebar.propTypes = {
+  open: PropTypes.bool.isRequired
 };
 
 export default Sidebar;

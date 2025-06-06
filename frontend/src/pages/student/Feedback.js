@@ -24,7 +24,6 @@ import {
   HelpOutline,
   Chat
 } from '@mui/icons-material';
-import { useAuth } from '../../contexts/AuthContext';
 
 const Feedback = () => {
   const [courses, setCourses] = useState([]);
@@ -34,7 +33,6 @@ const Feedback = () => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
-  const { currentUser } = useAuth();
   
   const [feedbackData, setFeedbackData] = useState({
     course_id: '',
@@ -63,7 +61,6 @@ const Feedback = () => {
       
     } catch (err) {
       setError('Failed to load initial data');
-      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -83,7 +80,7 @@ const Feedback = () => {
       const response = await axios.get(`/api/courses/${feedbackData.course_id}/lessons`);
       setLessons(response.data.lessons);
     } catch (err) {
-      console.error('Failed to fetch lessons:', err);
+      setError('Failed to fetch lessons');
     }
   };
 
@@ -127,7 +124,6 @@ const Feedback = () => {
       
     } catch (err) {
       setError('Failed to submit feedback');
-      console.error(err);
     } finally {
       setSubmitting(false);
     }
@@ -345,7 +341,7 @@ const Feedback = () => {
                         {feedback.response && (
                           <Box sx={{ mt: 2, p: 1.5, bgcolor: '#f5f5f5', borderRadius: 1 }}>
                             <Typography variant="subtitle2">
-                              Teacher's Response:
+                              Teacher&apos;s Response:
                             </Typography>
                             <Typography variant="body2">
                               {feedback.response}
@@ -364,7 +360,7 @@ const Feedback = () => {
               <Box sx={{ textAlign: 'center', py: 4 }}>
                 <QuestionAnswer sx={{ fontSize: 60, color: 'text.secondary', mb: 2 }} />
                 <Typography variant="body1" color="text.secondary">
-                  You haven't submitted any questions or feedback yet.
+                  You haven&apos;t submitted any questions or feedback yet.
                 </Typography>
               </Box>
             )}

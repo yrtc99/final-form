@@ -75,7 +75,6 @@ const CourseManagement = () => {
       setCourses(response.data.courses);
     } catch (err) {
       setError('載入課程失敗');
-      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -100,7 +99,6 @@ const CourseManagement = () => {
       setCourseToDelete(null);
     } catch (err) {
       setError('刪除課程失敗');
-      console.error(err);
     }
   };
 

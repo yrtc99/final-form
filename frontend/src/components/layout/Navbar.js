@@ -1,10 +1,11 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, IconButton, Avatar, Menu, MenuItem, Box } from '@mui/material';
-import { Menu as MenuIcon, AccountCircle } from '@mui/icons-material';
+import { Menu as MenuIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import PropTypes from 'prop-types';
 
-const Navbar = ({ open, toggleDrawer }) => {
+const Navbar = ({toggleDrawer }) => {
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -93,6 +94,11 @@ const Navbar = ({ open, toggleDrawer }) => {
       </Toolbar>
     </AppBar>
   );
+};
+
+Navbar.propTypes = {
+  open: PropTypes.bool,
+  toggleDrawer: PropTypes.func.isRequired
 };
 
 export default Navbar;

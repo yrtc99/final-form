@@ -51,7 +51,6 @@ const CourseView = () => {
         // 確保currentUser存在且有id屬性
         const studentId = currentUser?.id;
         if (!studentId) {
-          console.error('No student ID available. User might not be logged in properly.');
           setError('請登入以查看課程進度。');
           // 仍然可以顯示課程內容，但沒有進度數據
           setProgress({});
@@ -79,12 +78,11 @@ const CourseView = () => {
                 }
               });
             } else {
-              console.warn('Progress data structure is not as expected:', progressResponse.data);
+              setError('Progress data structure is not as expected:', progressResponse.data);
             }
             
             setProgress(progressMap);
           } catch (err) {
-            console.error('Error fetching progress data:', err);
             // 發生錯誤時仍然可以顯示課程內容
             setProgress({});
           }
@@ -94,7 +92,6 @@ const CourseView = () => {
         
       } catch (err) {
         setError('載入課程資料失敗');
-        console.error(err);
       } finally {
         setLoading(false);
       }

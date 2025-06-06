@@ -33,7 +33,6 @@ const CourseList = () => {
       const response = await axios.get(`/api/courses/enrolled?student_id=${currentUser.id}`);
       setCourses(response.data.courses);
     } catch (err) {
-      console.error("Error fetching enrolled courses:", err);
       setError(err.response?.data?.error || '無法獲取已註冊的課程。請稍後再試。');
     } finally {
       setLoading(false);

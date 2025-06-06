@@ -42,7 +42,6 @@ const StudentDashboard = () => {
         
       } catch (err) {
         setError('Failed to load dashboard data');
-        console.error(err);
       } finally {
         setLoading(false);
       }

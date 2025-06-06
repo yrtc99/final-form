@@ -13,6 +13,7 @@ import {
   InputAdornment
 } from '@mui/material';
 import { Add, Delete } from '@mui/icons-material';
+import PropTypes from 'prop-types';
 
 const MultipleChoiceEditor = ({ data, onChange }) => {
   const handleChange = (field, value) => {
@@ -145,6 +146,15 @@ const MultipleChoiceEditor = ({ data, onChange }) => {
       </Grid>
     </Grid>
   );
+};
+
+MultipleChoiceEditor.propTypes = {
+  data: PropTypes.shape({
+    question: PropTypes.string,
+    options: PropTypes.arrayOf(PropTypes.string),
+    correct_option: PropTypes.number
+  }).isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default MultipleChoiceEditor;

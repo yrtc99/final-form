@@ -7,6 +7,7 @@ import {
   Paper,
   Divider
 } from '@mui/material';
+import PropTypes from 'prop-types';
 
 const CodingExerciseEditor = ({ data, onChange }) => {
   const [instructions, setInstructions] = useState(data.instructions || '');
@@ -87,7 +88,7 @@ const CodingExerciseEditor = ({ data, onChange }) => {
           <Divider sx={{ mb: 2 }} />
           <Box sx={{ mb: 2 }}>
             <Typography variant="caption" color="text.secondary">
-              Write test cases to verify the student's solution. This code will run against both the starter code and solution code.
+              Write test cases to verify the student&apos;s solution. This code will run against both the starter code and solution code.
             </Typography>
           </Box>
           <TextField
@@ -104,6 +105,17 @@ const CodingExerciseEditor = ({ data, onChange }) => {
       </Grid>
     </Grid>
   );
+};
+
+// 添加 PropTypes 驗證
+CodingExerciseEditor.propTypes = {
+  data: PropTypes.shape({
+    instructions: PropTypes.string,
+    starter_code: PropTypes.string,
+    solution_code: PropTypes.string,
+    test_code: PropTypes.string
+  }).isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default CodingExerciseEditor;

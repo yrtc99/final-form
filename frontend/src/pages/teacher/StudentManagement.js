@@ -8,13 +8,10 @@ import {
   Alert,
   Paper,
   List,
+  Checkbox,
   ListItem,
   ListItemText,
-  ListItemIcon,
-  Checkbox,
   Button,
-  Divider,
-  Grid,
   TextField,
   InputAdornment
 } from '@mui/material';
@@ -37,7 +34,6 @@ const StudentManagement = () => {
       const response = await axios.get(`/api/courses/${courseId}`);
       setCourse(response.data.course);
     } catch (err) {
-      console.error('Error fetching course details:', err);
       setError('無法載入課程詳情。');
     }
   }, [courseId]);
@@ -48,7 +44,6 @@ const StudentManagement = () => {
       const response = await axios.get('/api/users/students');
       setAllStudents(response.data.students || []);
     } catch (err) {
-      console.error('Error fetching all students:', err);
       setError(prev => prev + (prev ? ' ' : '') + '無法載入所有學生列表。');
     }
   }, []);
@@ -59,7 +54,6 @@ const StudentManagement = () => {
       const enrolledIds = new Set((response.data.enrollments || []).map(enrollment => enrollment.student_id));
       setEnrolledStudentIds(enrolledIds);
     } catch (err) {
-      console.error('Error fetching enrolled students:', err);
       setError(prev => prev + (prev ? ' ' : '') + '無法載入已註冊學生列表。');
     }
   }, [courseId]);
@@ -101,7 +95,6 @@ const StudentManagement = () => {
       // Optionally, show a success message
       alert('學生註冊狀態已更新！'); // Replace with Snackbar later
     } catch (err) {
-      console.error('Error saving enrollments:', err);
       setError('儲存學生註冊狀態失敗。');
       // Re-fetch enrolled students to revert optimistic UI updates if needed
       fetchEnrolledStudents();

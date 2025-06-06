@@ -10,7 +10,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Chip,
   Alert,
   CircularProgress,
   TextField,
@@ -50,7 +49,6 @@ const StudentsPage = () => {
       setStudents(response.data.students);
       setError('');
     } catch (err) {
-      console.error('Error fetching students:', err);
       setError('載入學生列表失敗：' + (err.response?.data?.error || '請稍後再試'));
     } finally {
       setLoading(false);
@@ -99,7 +97,6 @@ const StudentsPage = () => {
       setSnackbarSeverity('success');
       setSnackbarOpen(true);
     } catch (err) {
-      console.error('Error adding student:', err);
       setAddError(err.response?.data?.error || '新增學生失敗，請稍後再試。');
       setSnackbarMessage(err.response?.data?.error || '新增學生失敗！');
       setSnackbarSeverity('error');
@@ -131,7 +128,6 @@ const StudentsPage = () => {
       setSnackbarSeverity('success');
       setSnackbarOpen(true);
     } catch (err) {
-      console.error('Error deleting student:', err);
       setDeleteError(err.response?.data?.error || '刪除學生失敗，請稍後再試。');
       setSnackbarMessage(err.response?.data?.error || '刪除學生失敗！');
       setSnackbarSeverity('error');
@@ -289,7 +285,7 @@ const StudentsPage = () => {
         <DialogTitle id="alert-dialog-title-delete-student">確認刪除學生</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description-delete-student">
-            您確定要刪除學生 "{studentToDelete?.username}" 嗎？此操作無法復原。
+            您確定要刪除學生 &quot;{studentToDelete?.username}&quot; 嗎？此操作無法復原。
           </DialogContentText>
           {deleteError && <Alert severity="error" sx={{ mt: 2 }}>{deleteError}</Alert>}
         </DialogContent>

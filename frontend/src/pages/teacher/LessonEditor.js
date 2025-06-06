@@ -114,7 +114,6 @@ const LessonEditor = () => {
       
     } catch (err) {
       setError('Failed to load lesson data');
-      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -183,7 +182,6 @@ const LessonEditor = () => {
       }, 3000);
     } catch (err) {
       setError('Failed to save lesson');
-      console.error(err);
     } finally {
       setSaving(false);
     }

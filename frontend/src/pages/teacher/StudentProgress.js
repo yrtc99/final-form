@@ -121,7 +121,6 @@ const StudentProgress = () => {
       
     } catch (err) {
       setError('載入學生資料失敗');
-      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -137,7 +136,6 @@ const StudentProgress = () => {
       
     } catch (err) {
       setError('載入進度資料失敗');
-      console.error(err);
     } finally {
       setLoading(false);
     }

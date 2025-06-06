@@ -3,9 +3,6 @@ import {
   Container, 
   Typography, 
   Grid, 
-  Card, 
-  CardContent, 
-  CardActions,
   Button,
   Box,
   CircularProgress,
@@ -67,7 +64,6 @@ const TeacherDashboard = () => {
         
       } catch (err) {
         setError('載入儀表板數據失敗');
-        console.error(err);
       } finally {
         setLoading(false);
       }

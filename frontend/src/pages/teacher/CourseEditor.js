@@ -21,7 +21,6 @@ import {
   DialogTitle,
   Card,
   CardContent,
-  CardActions,
   Grid,
   Accordion,
   AccordionSummary,
@@ -85,7 +84,6 @@ const CourseEditor = () => {
       setUnits(sortedUnits);
     } catch (err) {
       setError('載入課程資料失敗');
-      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -125,7 +123,6 @@ const CourseEditor = () => {
       }, 3000);
     } catch (err) {
       setError('儲存課程失敗');
-      console.error(err);
     } finally {
       setSaving(false);
     }
@@ -180,7 +177,6 @@ const CourseEditor = () => {
       }, 3000);
     } catch (err) {
       setError('儲存單元失敗');
-      console.error(err);
     }
   };
 
@@ -221,7 +217,6 @@ const CourseEditor = () => {
       }, 3000);
     } catch (err) {
       setError(`Failed to delete ${deleteType}`);
-      console.error(err);
     }
   };
 
@@ -258,7 +253,6 @@ const CourseEditor = () => {
       setUnits(newUnits);
     } catch (err) {
       setError('Failed to reorder units');
-      console.error(err);
     }
   };
 

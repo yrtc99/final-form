@@ -35,7 +35,6 @@ import {
   PointElement,
   ArcElement
 } from 'chart.js';
-import { useAuth } from '../../contexts/AuthContext';
 
 ChartJS.register(
   CategoryScale,
@@ -54,7 +53,6 @@ const StudentProgress = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState(0);
-  const { currentUser } = useAuth();
 
   useEffect(() => {
     fetchProgressData();
@@ -67,7 +65,6 @@ const StudentProgress = () => {
       setProgressData(response.data);
     } catch (err) {
       setError('Failed to load progress data');
-      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -413,7 +410,7 @@ const StudentProgress = () => {
             </TableContainer>
           ) : (
             <Alert severity="info">
-              You haven't attempted any exercises yet.
+              You haven&apos;t attempted any exercises yet.
             </Alert>
           )}
         </Paper>

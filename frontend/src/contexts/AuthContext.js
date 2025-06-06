@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 const AuthContext = createContext();
 
@@ -46,7 +47,7 @@ export function AuthProvider({ children }) {
   const register = async (username, password, role) => {
     try {
       setError('');
-      console.log('Sending registration request with data:', { username, password, role });
+      setError('正在註冊...');
       
       const response = await axios.post('http://localhost:5000/api/auth/register', {
         username,
@@ -54,12 +55,10 @@ export function AuthProvider({ children }) {
         role
       });
       
-      console.log('Registration successful:', response.data);
+      setError('');
       return response.data;
     } catch (err) {
-      console.error('Registration error:', err);
       const errorMessage = err.response?.data?.error || '註冊失敗';
-      console.error('Error details:', errorMessage);
       setError(errorMessage);
       throw err;
     }
@@ -75,7 +74,6 @@ export function AuthProvider({ children }) {
   const updateProfile = async (userData) => {
     try {
       setError('');
-      // 添加當前用戶 ID 到請求
       const requestData = {
         ...userData,
         user_id: currentUser.id
@@ -85,7 +83,6 @@ export function AuthProvider({ children }) {
       
       const updatedUser = response.data.user;
       
-      // Update localStorage
       localStorage.setItem('user', JSON.stringify(updatedUser));
       
       setCurrentUser(updatedUser);
@@ -130,3 +127,7 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired
+};

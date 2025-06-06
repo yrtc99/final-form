@@ -14,6 +14,7 @@ import {
   Alert
 } from '@mui/material';
 import { Add, Delete } from '@mui/icons-material';
+import PropTypes from 'prop-types';
 
 // Define constant to avoid ESLint errors
 const BLANK = "BLANK";
@@ -94,7 +95,7 @@ const FillInBlankEditor = ({ data, onChange }) => {
         </Typography>
         <Box sx={{ mb: 2 }}>
           <Typography variant="caption" color="text.secondary">
-            Enter your text and use the "Insert Blank" button to add blank placeholders ({{BLANK}}).
+            Enter your text and use the &quot;Insert Blank&quot; button to add blank placeholders (&#123;&#123;BLANK&#125;&#125;).
           </Typography>
         </Box>
         <TextField
@@ -231,6 +232,15 @@ const FillInBlankEditor = ({ data, onChange }) => {
       </Grid>
     </Grid>
   );
+};
+
+// 添加PropTypes驗證
+FillInBlankEditor.propTypes = {
+  data: PropTypes.shape({
+    text: PropTypes.string,
+    blanks: PropTypes.arrayOf(PropTypes.string)
+  }).isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default FillInBlankEditor;

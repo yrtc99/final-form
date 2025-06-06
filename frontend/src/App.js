@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Box } from '@mui/material';
-import { useAuth } from './contexts/AuthContext';
+import PropTypes from 'prop-types';
 
 // Layout components
 import Layout from './components/layout/Layout';
@@ -31,6 +31,8 @@ import StudentsPage from './pages/teacher/StudentsPage';
 // Common components
 import ProfilePage from './pages/common/ProfilePage';
 
+// Contexts
+import { useAuth } from './contexts/AuthContext';
 
 function App() {
   const { currentUser, loading } = useAuth();
@@ -38,7 +40,7 @@ function App() {
   // Protected route component
   const ProtectedRoute = ({ children, requiredRole }) => {
     if (loading) {
-      return <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>Loading...</Box>;
+      return <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>&#8230;Loading&#8230;</Box>;
     }
     
     if (!currentUser) {
@@ -50,6 +52,12 @@ function App() {
     }
     
     return children;
+  };
+
+  // 添加 PropTypes 驗證
+  ProtectedRoute.propTypes = {
+    children: PropTypes.node.isRequired,
+    requiredRole: PropTypes.string
   };
 
   return (
